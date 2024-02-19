@@ -4,3 +4,4 @@ extends Resource
 var priority: int = 0
 var player: AudioStreamPlayer
 var sound: String
+var volume: float

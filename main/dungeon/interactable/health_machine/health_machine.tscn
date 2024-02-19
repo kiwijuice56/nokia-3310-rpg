@@ -3,28 +3,43 @@
 [ext_resource type="PackedScene" uid="uid://2q7iqu5nuovb" path="res://main/dungeon/interactable/interactable.tscn" id="1_43vem"]
 [ext_resource type="Script" path="res://main/dungeon/interactable/health_machine/health_machine.gd" id="2_kk583"]
 [ext_resource type="Texture2D" uid="uid://divpan24tgivu" path="res://main/dungeon/interactable/health_machine/health_machine.png" id="2_qic58"]
-[ext_resource type="Script" path="res://main/ui/line.gd" id="3_edo6a"]
+[ext_resource type="Script" path="res://main/ui/textbox/line.gd" id="3_yhp1s"]
 
 [sub_resource type="Resource" id="Resource_0o6dw"]
-script = ExtResource("3_edo6a")
+script = ExtResource("3_yhp1s")
 text = "(A warm, red glow permeates the air as a cube phases into reality). "
 speed = 0.02
 sound = ""
 choices = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_h4vv6"]
-script = ExtResource("3_edo6a")
+script = ExtResource("3_yhp1s")
 text = "(...)"
 speed = 0.06
 sound = ""
 choices = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_y0fal"]
-script = ExtResource("3_edo6a")
+script = ExtResource("3_yhp1s")
 text = "(Your wounds have been healed)."
 speed = 0.03
 sound = "heal"
 choices = Array[String]([])
+
+[sub_resource type="Animation" id="Animation_k2bts"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_gyihk"]
 resource_name = "idle"
@@ -43,21 +58,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
-[sub_resource type="Animation" id="Animation_k2bts"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q23na"]
 _data = {
 "RESET": SubResource("Animation_k2bts"),
@@ -66,7 +66,7 @@ _data = {
 
 [node name="HealthMachine" instance=ExtResource("1_43vem")]
 script = ExtResource("2_kk583")
-convo = Array[ExtResource("3_edo6a")]([SubResource("Resource_0o6dw"), SubResource("Resource_h4vv6"), SubResource("Resource_y0fal")])
+convo = Array[ExtResource("3_yhp1s")]([SubResource("Resource_0o6dw"), SubResource("Resource_h4vv6"), SubResource("Resource_y0fal")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_qic58")

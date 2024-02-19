@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsdm2cw8dhp2u"]
+
+[ext_resource type="Script" path="res://main/ui/textbox/textbox.gd" id="1_sgipo"]
+[ext_resource type="Theme" uid="uid://cwrkv7lqfv2jk" path="res://main/ui/theme.tres" id="2_6swcg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkr3i"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0, 0, 0, 1)
+
+[node name="TextBox" type="PanelContainer"]
+visible = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 28.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xkr3i")
+script = ExtResource("1_sgipo")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("2_6swcg")
+
+[node name="Label" type="Label" parent="PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_constants/line_spacing = 0
+text = "
+
+
+
+"
+autowrap_mode = 2
+visible_characters_behavior = 1
+
+[node name="MiniDelay" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true

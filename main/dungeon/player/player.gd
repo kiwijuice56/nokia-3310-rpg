@@ -15,11 +15,45 @@ var move_map: Dictionary = {
 	"ui_down": Vector2(0, 1),
 }
 
+func check_stats() -> void:
+	AudioManager.play_sound("accept", 2)
+	await Ref.statbox.trans_in()
+	await Ref.statbox.open()
+	await Ref.statbox.trans_out()
+	can_move = true
+
+func check_items() -> void:
+	AudioManager.play_sound("accept", 2)
+	var items: Array[String] = []
+	var vals: Array[String] = []
+	# Render them in an order I like:)
+	for item in ["Gold", "Soma", "Bomb", "Corpse", "Kila", "Cross", "Brain", "Orb"]:
+		if item in Status.player_stats.items:
+			items.append(item + ":")
+			vals.append(str(Status.player_stats.items[item]))
+	await Ref.itembox.trans_in() 
+	await Ref.itembox.open(items, vals)
+	await Ref.itembox.trans_out()
+	can_move = true
+
 func _process(_delta: float) -> void:
 	if not can_move:
 		return
-	
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("stats"):
+		if is_instance_valid(move_tween) and move_tween.is_running():
+			return
+		can_move = false
+		check_stats()
+		return
+	if Input.is_action_just_pressed("item"):
+		if is_instance_valid(move_tween) and move_tween.is_running():
+			return
+		can_move = false
+		check_items()
+		return
+	if Input.is_action_just_pressed("accept"):
+		if is_instance_valid(move_tween) and move_tween.is_running():
+			return
 		if not $RayCast2D.is_colliding():
 			return
 		var collider = $RayCast2D.get_collider()
