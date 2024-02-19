@@ -1,0 +1,23 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cwrkv7lqfv2jk"]
+
+[ext_resource type="FontFile" uid="uid://ds7w6pbve1oc0" path="res://main/ui/tiny.ttf" id="1_6wj2t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvk4f"]
+content_margin_left = 2.0
+content_margin_top = 1.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.529412, 0.568627, 0.533333, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_j4dlu"]
+base_font = ExtResource("1_6wj2t")
+
+[resource]
+default_font = SubResource("FontVariation_j4dlu")
+default_font_size = 6
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_hvk4f")

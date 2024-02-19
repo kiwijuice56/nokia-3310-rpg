@@ -1,0 +1,46 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="nokia-3300-rpg"
+run/main_scene="res://main/main.tscn"
+config/features=PackedStringArray("4.2", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+AudioManager="*res://main/audio/audio_manager.gd"
+Ref="*res://main/ref.gd"
+
+[debug]
+
+shapes/collision/shape_color=Color(0, 0.596078, 0.701961, 0.168627)
+
+[display]
+
+window/size/viewport_width=84
+window/size/viewport_height=48
+window/size/window_width_override=672
+window/size/window_height_override=384
+window/stretch/mode="viewport"
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="map"
+2d_physics/layer_3="interactable"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

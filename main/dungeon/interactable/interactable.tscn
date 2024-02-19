@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://2q7iqu5nuovb"]
+
+[ext_resource type="Script" path="res://main/dungeon/interactable/interactable.gd" id="1_iis1g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edgh6"]
+size = Vector2(6, 6)
+
+[node name="Interactable" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_iis1g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_edgh6")
