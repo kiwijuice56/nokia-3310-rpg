@@ -93,5 +93,24 @@ func slide() -> void:
 		just_bumped = false
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("walk")
-		move_tween = get_tree().create_tween()
+		move_tween = get_tree().create_tween().set_parallel(true)
 		move_tween.tween_property(self, "position", position + dir * 6, move_time)
+		
+		var new_position: Vector2 = position + dir * 6
+		var top_left: Vector2 = Ref.dungeon.screen * Vector2(84, 48)
+		var bottom_right: Vector2 = (Ref.dungeon.screen + Vector2(1, 1)) * Vector2(84, 48)
+		var camera_offset: Vector2 = Vector2()
+		if new_position.x < top_left.x:
+			camera_offset = Vector2(-1, 0)
+		if new_position.x > bottom_right.x:
+			camera_offset = Vector2(1, 0)
+		if new_position.y < top_left.y:
+			camera_offset = Vector2(0, -1)
+		if new_position.y > bottom_right.y:
+			camera_offset = Vector2(0, 1)
+		if camera_offset.length() > 0:
+			move_tween.tween_property(Ref.camera, "position", Ref.camera.position + camera_offset * Vector2(84, 48), move_time * 6)
+			Ref.dungeon.update_screen(Ref.dungeon.screen + camera_offset)
+			can_move = false
+			await move_tween.finished
+			can_move = true

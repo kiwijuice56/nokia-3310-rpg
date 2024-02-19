@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://oah07b5k8nlo"]
+
+[ext_resource type="Script" path="res://main/dungeon/dungeon.gd" id="1_2mj4t"]
+[ext_resource type="Texture2D" uid="uid://d2yuqetc4xpj1" path="res://main/dungeon/pair_block.png" id="2_b01mh"]
+[ext_resource type="Texture2D" uid="uid://38edw4c1vwdb" path="res://main/dungeon/map.png" id="2_o8cc2"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xabgt"]
+texture = ExtResource("2_b01mh")
+texture_region_size = Vector2i(6, 6)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
+
+[sub_resource type="TileSet" id="TileSet_fh817"]
+tile_size = Vector2i(6, 6)
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_xabgt")
+
+[node name="Dungeon" type="Node2D"]
+script = ExtResource("1_2mj4t")
+music = Array[String](["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "mundane_mystery", "", "", "", "", ""])
+
+[node name="Floor" type="Sprite2D" parent="."]
+texture = ExtResource("2_o8cc2")
+centered = false
+
+[node name="CollisionTileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_fh817")
+collision_visibility_mode = 1
+format = 2

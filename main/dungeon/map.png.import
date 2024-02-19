@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da65oj8rmxjc2"
-path="res://.godot/imported/white_block.png-a12079c95f30320104dd5b3b8d8b57a8.ctex"
+uid="uid://38edw4c1vwdb"
+path="res://.godot/imported/map.png-bbb76a2798383dda03252ea9f2c37bb4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://main/dungeon/white_block.png"
-dest_files=["res://.godot/imported/white_block.png-a12079c95f30320104dd5b3b8d8b57a8.ctex"]
+source_file="res://main/dungeon/map.png"
+dest_files=["res://.godot/imported/map.png-bbb76a2798383dda03252ea9f2c37bb4.ctex"]
 
 [params]
 

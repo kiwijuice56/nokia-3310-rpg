@@ -31,6 +31,13 @@ func play_sound(sound: String, priority: int, volume: float = 0):
 	instances.append(instance)
 	validate_sound() 
 
+func stop_sound(sound: String) -> void:
+	for instance in instances:
+		if instance.sound == sound:
+			_on_instance_finished(instance)
+			validate_sound()
+			return
+
 func is_playing(sound: String):
 	for instance in instances:
 		if instance.sound == sound:
