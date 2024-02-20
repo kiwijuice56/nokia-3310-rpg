@@ -37,13 +37,13 @@ collision_visibility_mode = 1
 format = 2
 
 [node name="HealthMachine" parent="." instance=ExtResource("3_h7vba")]
-position = Vector2(543, 550)
+position = Vector2(543, 549)
 
 [node name="HealthMachine2" parent="." instance=ExtResource("3_h7vba")]
 position = Vector2(711, 273)
 
 [node name="Shop" parent="." instance=ExtResource("4_y658e")]
-position = Vector2(549, 556)
+position = Vector2(549, 555)
 
 [node name="Shop2" parent="." instance=ExtResource("4_y658e")]
 position = Vector2(159, 507)

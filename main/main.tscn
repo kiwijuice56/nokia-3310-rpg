@@ -63,7 +63,7 @@ _data = {
 
 [node name="Player" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_o3yem")
-position = Vector2(549, 550)
+position = Vector2(549, 549)
 texture = ExtResource("2_ohveo")
 hframes = 2
 script = ExtResource("3_adq4t")
