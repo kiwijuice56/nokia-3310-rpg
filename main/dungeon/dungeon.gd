@@ -11,7 +11,6 @@ func _ready() -> void:
 func update_screen(new_screen: Vector2) -> void:
 	var index: int = screen.x + 12 * screen.y
 	var new_index: int = new_screen.x + 12 * new_screen.y
-	print(music[index], " ", music[new_index])
 	if not music[index] == music[new_index]:
 		AudioManager.stop_sound(music[index])
 		if len(music[new_index]) > 0:

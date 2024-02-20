@@ -13,6 +13,7 @@ func _ready() -> void:
 	sounds["mundane_mystery"] = preload("res://main/audio/music/mundane_mystery.wav")
 	sounds["haunt"] = preload("res://main/audio/music/haunt.wav")
 	sounds["great_fight"] = preload("res://main/audio/music/great_fight.wav")
+	sounds["battle"] = preload("res://main/audio/music/battle.wav")
 	loaded = true
 
 func play_sound(sound: String, priority: int, volume: float = 0):

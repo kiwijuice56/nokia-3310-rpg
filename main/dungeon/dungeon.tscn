@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://oah07b5k8nlo"]
+[gd_scene load_steps=8 format=3 uid="uid://oah07b5k8nlo"]
 
 [ext_resource type="Script" path="res://main/dungeon/dungeon.gd" id="1_2mj4t"]
 [ext_resource type="Texture2D" uid="uid://d2yuqetc4xpj1" path="res://main/dungeon/pair_block.png" id="2_b01mh"]
 [ext_resource type="Texture2D" uid="uid://38edw4c1vwdb" path="res://main/dungeon/map.png" id="2_o8cc2"]
+[ext_resource type="PackedScene" uid="uid://bvcd6t3857t" path="res://main/dungeon/interactable/health_machine/health_machine.tscn" id="3_h7vba"]
+[ext_resource type="PackedScene" uid="uid://cbqendapl42e2" path="res://main/dungeon/interactable/shop/shop.tscn" id="4_y658e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xabgt"]
 texture = ExtResource("2_b01mh")
@@ -23,7 +25,7 @@ sources/0 = SubResource("TileSetAtlasSource_xabgt")
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_2mj4t")
-music = Array[String](["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "great_fight", "haunt", "", "", "", ""])
+music = Array[String](["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "battle", "haunt", "", "", "", ""])
 
 [node name="Floor" type="Sprite2D" parent="."]
 texture = ExtResource("2_o8cc2")
@@ -33,3 +35,15 @@ centered = false
 tile_set = SubResource("TileSet_fh817")
 collision_visibility_mode = 1
 format = 2
+
+[node name="HealthMachine" parent="." instance=ExtResource("3_h7vba")]
+position = Vector2(543, 550)
+
+[node name="HealthMachine2" parent="." instance=ExtResource("3_h7vba")]
+position = Vector2(711, 273)
+
+[node name="Shop" parent="." instance=ExtResource("4_y658e")]
+position = Vector2(549, 556)
+
+[node name="Shop2" parent="." instance=ExtResource("4_y658e")]
+position = Vector2(159, 507)
