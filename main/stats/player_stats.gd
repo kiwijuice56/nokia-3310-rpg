@@ -8,3 +8,4 @@ extends Resource
 @export var dexterity: int
 
 @export var items: Dictionary
+@export var flags: Dictionary

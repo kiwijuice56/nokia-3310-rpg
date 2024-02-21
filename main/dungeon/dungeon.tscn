@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://oah07b5k8nlo"]
+[gd_scene load_steps=26 format=3 uid="uid://oah07b5k8nlo"]
 
 [ext_resource type="Script" path="res://main/dungeon/dungeon.gd" id="1_2mj4t"]
 [ext_resource type="Texture2D" uid="uid://d2yuqetc4xpj1" path="res://main/dungeon/pair_block.png" id="2_b01mh"]
@@ -6,6 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://bvcd6t3857t" path="res://main/dungeon/interactable/health_machine/health_machine.tscn" id="3_h7vba"]
 [ext_resource type="PackedScene" uid="uid://cbqendapl42e2" path="res://main/dungeon/interactable/shop/shop.tscn" id="4_y658e"]
 [ext_resource type="Texture2D" uid="uid://bjfj4v0i5gl6f" path="res://main/dungeon/water.png" id="6_7ewyj"]
+[ext_resource type="PackedScene" uid="uid://b8p34nr2j67t5" path="res://main/dungeon/interactable/cache_box/cache_box.tscn" id="7_7woqm"]
+[ext_resource type="PackedScene" uid="uid://2nayajefompd" path="res://main/dungeon/interactable/character/character.tscn" id="8_0pq14"]
+[ext_resource type="Script" path="res://main/ui/textbox/line.gd" id="9_7s5am"]
+[ext_resource type="Texture2D" uid="uid://btx4vrqd2r0ks" path="res://main/dungeon/interactable/character/angel.png" id="9_qk1l6"]
+[ext_resource type="PackedScene" uid="uid://b3kb1judf4iw2" path="res://main/dungeon/interactable/barrier/barrier.tscn" id="11_hsppn"]
+[ext_resource type="Texture2D" uid="uid://cvk5g61780ury" path="res://main/dungeon/interactable/barrier/bars.png" id="12_w10b3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s33bo"]
 texture = ExtResource("6_7ewyj")
@@ -40,9 +46,68 @@ physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_xabgt")
 
+[sub_resource type="Resource" id="Resource_1iavy"]
+script = ExtResource("9_7s5am")
+text = "Utter nonsense wants to go to hell."
+speed = 0.03
+sound = "ring"
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_00qfi"]
+script = ExtResource("9_7s5am")
+text = "I am a servant of the Lord."
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lbwn"]
+size = Vector2(12, 12)
+
+[sub_resource type="Resource" id="Resource_0pnhc"]
+script = ExtResource("9_7s5am")
+text = "The body of mind is running away."
+speed = 0.03
+sound = "ring"
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_emllv"]
+script = ExtResource("9_7s5am")
+text = "(The iron bars are thoroughly rusted.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_un7h8"]
+script = ExtResource("9_7s5am")
+text = "(You try to shatter them with sheer force.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_mbobe"]
+script = ExtResource("9_7s5am")
+text = "(You crumple the bars using your %s.)"
+speed = 0.03
+sound = "hit4"
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_mq224"]
+script = ExtResource("9_7s5am")
+text = "That stolen figurine is nothing at all?"
+speed = 0.03
+sound = "ring"
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_b505j"]
+script = ExtResource("9_7s5am")
+text = "The other side runs through everything."
+speed = 0.03
+sound = "ring"
+choices = Array[String]([])
+
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_2mj4t")
-music = Array[String](["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "battle", "haunt", "", "", "", ""])
+music = Array[String](["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "mundane_mystery", "haunt", "", "", "", ""])
 
 [node name="AnimatedTileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_72mcu")
@@ -69,3 +134,253 @@ position = Vector2(549, 555)
 
 [node name="Shop2" parent="." instance=ExtResource("4_y658e")]
 position = Vector2(159, 507)
+
+[node name="CacheBox" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(603, 567)
+item = "Gold"
+count = 5
+
+[node name="CacheBox2" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(657, 567)
+item = "Gold"
+count = 5
+
+[node name="CacheBox3" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(657, 537)
+item = "Gold"
+count = 5
+
+[node name="CacheBox4" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(603, 537)
+item = "Gold"
+count = 5
+
+[node name="CacheBox5" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(603, 537)
+item = "Gold"
+count = 5
+
+[node name="CacheBox6" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(627, 555)
+item = "Gold"
+count = 5
+
+[node name="CacheBox7" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(543, 507)
+item = "Gold"
+count = 5
+
+[node name="CacheBox8" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(861, 555)
+item = "Gold"
+count = 5
+
+[node name="CacheBox9" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(867, 555)
+item = "Gold"
+count = 5
+
+[node name="CacheBox14" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(855, 567)
+item = "Gold"
+count = 5
+
+[node name="CacheBox15" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(885, 549)
+item = "Gold"
+count = 5
+
+[node name="CacheBox16" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(915, 567)
+item = "Gold"
+count = 5
+
+[node name="CacheBox17" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(915, 549)
+item = "Gold"
+count = 5
+
+[node name="CacheBox18" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(903, 549)
+item = "Gold"
+count = 5
+
+[node name="CacheBox19" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(867, 537)
+item = "Gold"
+count = 5
+
+[node name="CacheBox20" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(945, 543)
+item = "Gold"
+count = 5
+
+[node name="CacheBox21" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(945, 555)
+item = "Gold"
+count = 5
+
+[node name="CacheBox22" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(945, 549)
+item = "Gold"
+count = 5
+
+[node name="CacheBox23" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(957, 549)
+item = "Gold"
+count = 5
+
+[node name="CacheBox24" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(993, 567)
+item = "Gold"
+count = 5
+
+[node name="CacheBox25" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(987, 567)
+item = "Gold"
+count = 5
+
+[node name="CacheBox26" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(981, 567)
+item = "Gold"
+count = 5
+
+[node name="CacheBox27" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(969, 555)
+item = "Gold"
+count = 5
+
+[node name="CacheBox28" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(987, 543)
+item = "Gold"
+count = 5
+
+[node name="CacheBox29" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(981, 537)
+item = "Gold"
+count = 5
+
+[node name="CacheBox30" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(993, 513)
+item = "Gold"
+count = 5
+
+[node name="CacheBox31" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(885, 471)
+item = "Gold"
+count = 5
+
+[node name="CacheBox32" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(915, 393)
+item = "Gold"
+count = 5
+
+[node name="CacheBox33" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(795, 351)
+item = "Gold"
+count = 5
+
+[node name="CacheBox34" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(867, 315)
+item = "Gold"
+count = 5
+
+[node name="CacheBox35" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(675, 507)
+item = "Gold"
+count = 5
+
+[node name="CacheBox36" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(657, 501)
+item = "Gold"
+count = 5
+
+[node name="CacheBox37" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(843, 225)
+item = "Gold"
+count = 5
+
+[node name="CacheBox38" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(645, 207)
+item = "Gold"
+count = 5
+
+[node name="CacheBox39" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(657, 219)
+item = "Gold"
+count = 5
+
+[node name="CacheBox10" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(543, 453)
+item = "Gold"
+count = 5
+
+[node name="CacheBox11" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(627, 453)
+item = "Gold"
+count = 5
+
+[node name="CacheBox12" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(633, 459)
+item = "Gold"
+count = 5
+
+[node name="CacheBox13" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(717, 453)
+item = "Gold"
+count = 5
+
+[node name="Angel" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(558, 504)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_1iavy"), SubResource("Resource_00qfi")])
+
+[node name="CollisionShape2D" parent="Angel" index="0"]
+shape = SubResource("RectangleShape2D_1lbwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Angel"]
+texture = ExtResource("9_qk1l6")
+
+[node name="Angel2" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(546, 444)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_0pnhc"), SubResource("Resource_00qfi")])
+
+[node name="CollisionShape2D" parent="Angel2" index="0"]
+shape = SubResource("RectangleShape2D_1lbwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Angel2"]
+texture = ExtResource("9_qk1l6")
+
+[node name="Barrier" parent="." instance=ExtResource("11_hsppn")]
+position = Vector2(543, 537)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_emllv"), SubResource("Resource_un7h8")])
+success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_mbobe")])
+min_stat = 1
+
+[node name="Sprite2D" parent="Barrier" index="1"]
+texture = ExtResource("12_w10b3")
+
+[node name="Angel4" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(798, 468)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_mq224"), SubResource("Resource_00qfi")])
+
+[node name="CollisionShape2D" parent="Angel4" index="0"]
+shape = SubResource("RectangleShape2D_1lbwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Angel4"]
+texture = ExtResource("9_qk1l6")
+
+[node name="Angel3" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(630, 468)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_b505j"), SubResource("Resource_00qfi")])
+
+[node name="CollisionShape2D" parent="Angel3" index="0"]
+shape = SubResource("RectangleShape2D_1lbwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Angel3"]
+texture = ExtResource("9_qk1l6")
+
+[editable path="Angel"]
+[editable path="Angel2"]
+[editable path="Barrier"]
+[editable path="Angel4"]
+[editable path="Angel3"]

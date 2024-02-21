@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3kb1judf4iw2"]
+
+[ext_resource type="PackedScene" uid="uid://2q7iqu5nuovb" path="res://main/dungeon/interactable/interactable.tscn" id="1_rpk8c"]
+[ext_resource type="Script" path="res://main/dungeon/interactable/barrier/barrier.gd" id="2_inini"]
+[ext_resource type="Script" path="res://main/ui/textbox/line.gd" id="3_7p3hv"]
+
+[sub_resource type="Resource" id="Resource_qttwk"]
+script = ExtResource("3_7p3hv")
+text = "(But it looks like you need %d %s for that...)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[node name="Barrier" instance=ExtResource("1_rpk8c")]
+script = ExtResource("2_inini")
+convo = Array[ExtResource("3_7p3hv")]([])
+fail_convo = Array[ExtResource("3_7p3hv")]([SubResource("Resource_qttwk")])
+success_convo = Array[ExtResource("3_7p3hv")]([])
+min_stat = 0
+stat = "Strength"
+custom_id = ""
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]

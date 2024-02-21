@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://2nayajefompd"]
+
+[ext_resource type="PackedScene" uid="uid://2q7iqu5nuovb" path="res://main/dungeon/interactable/interactable.tscn" id="1_voxtu"]
+[ext_resource type="Script" path="res://main/dungeon/interactable/character/character.gd" id="2_2xbsa"]
+
+[node name="Character" instance=ExtResource("1_voxtu")]
+script = ExtResource("2_2xbsa")
+convo = Array[Resource("res://main/ui/textbox/line.gd")]([])

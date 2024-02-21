@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvcd6t3857t"]
+[gd_scene load_steps=12 format=3 uid="uid://bvcd6t3857t"]
 
 [ext_resource type="PackedScene" uid="uid://2q7iqu5nuovb" path="res://main/dungeon/interactable/interactable.tscn" id="1_43vem"]
 [ext_resource type="Script" path="res://main/dungeon/interactable/health_machine/health_machine.gd" id="2_kk583"]
@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_0o6dw"]
 script = ExtResource("3_yhp1s")
-text = "(A warm, red glow permeates the air as a cube phases into reality). "
+text = "(A warm, red glow permeates the air as a cube phases into reality.)"
 speed = 0.02
 sound = ""
 choices = Array[String]([])
@@ -21,9 +21,16 @@ choices = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_y0fal"]
 script = ExtResource("3_yhp1s")
-text = "(Your wounds have been healed)."
+text = "(Your wounds seal back together.)"
 speed = 0.03
 sound = "heal"
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_x0kb8"]
+script = ExtResource("3_yhp1s")
+text = "(Your progress has been recorded.)"
+speed = 0.03
+sound = ""
 choices = Array[String]([])
 
 [sub_resource type="Animation" id="Animation_k2bts"]
@@ -66,7 +73,7 @@ _data = {
 
 [node name="HealthMachine" instance=ExtResource("1_43vem")]
 script = ExtResource("2_kk583")
-convo = Array[ExtResource("3_yhp1s")]([SubResource("Resource_0o6dw"), SubResource("Resource_h4vv6"), SubResource("Resource_y0fal")])
+convo = Array[ExtResource("3_yhp1s")]([SubResource("Resource_0o6dw"), SubResource("Resource_h4vv6"), SubResource("Resource_y0fal"), SubResource("Resource_x0kb8")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_qic58")
