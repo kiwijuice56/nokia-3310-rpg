@@ -12,6 +12,16 @@ func _ready() -> void:
 	custom_id = name
 	if custom_id in Status.player_stats.flags:
 		queue_free()
+	
+	fail_convo = fail_convo.duplicate(true)
+	success_convo = success_convo.duplicate(true)
+	convo = convo.duplicate(true)
+	for i in range(len(convo)):
+		convo[i] = convo[i].duplicate(true)
+	for i in range(len(fail_convo)):
+		fail_convo[i] = fail_convo[i].duplicate(true)
+	for i in range(len(success_convo)):
+		success_convo[i] = success_convo[i].duplicate(true)
 
 func interact(player: Player) -> void:
 	player.can_move = false

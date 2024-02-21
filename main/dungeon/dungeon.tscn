@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://oah07b5k8nlo"]
+[gd_scene load_steps=43 format=3 uid="uid://oah07b5k8nlo"]
 
 [ext_resource type="Script" path="res://main/dungeon/dungeon.gd" id="1_2mj4t"]
 [ext_resource type="Texture2D" uid="uid://d2yuqetc4xpj1" path="res://main/dungeon/pair_block.png" id="2_b01mh"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://btx4vrqd2r0ks" path="res://main/dungeon/interactable/character/angel.png" id="9_qk1l6"]
 [ext_resource type="PackedScene" uid="uid://b3kb1judf4iw2" path="res://main/dungeon/interactable/barrier/barrier.tscn" id="11_hsppn"]
 [ext_resource type="Texture2D" uid="uid://cvk5g61780ury" path="res://main/dungeon/interactable/barrier/bars.png" id="12_w10b3"]
+[ext_resource type="Texture2D" uid="uid://bw3mys5rkq3x3" path="res://main/dungeon/interactable/character/person.png" id="13_r66my"]
+[ext_resource type="Texture2D" uid="uid://b5kicna0xj00o" path="res://main/dungeon/interactable/character/creature.png" id="14_ww5jb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s33bo"]
 texture = ExtResource("6_7ewyj")
@@ -91,12 +93,130 @@ speed = 0.03
 sound = "hit4"
 choices = Array[String]([])
 
+[sub_resource type="Resource" id="Resource_jdn87"]
+script = ExtResource("9_7s5am")
+text = "(The iron bars are thoroughly rusted.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_a5f7f"]
+script = ExtResource("9_7s5am")
+text = "(You try to shatter them with sheer force.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_1wi2j"]
+script = ExtResource("9_7s5am")
+text = "(You crumple the bars using your %s.)"
+speed = 0.03
+sound = "hit4"
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_u114e"]
+script = ExtResource("9_7s5am")
+text = "(The steel bars barely move as you push them.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_dmv7f"]
+script = ExtResource("9_7s5am")
+text = "(You try to shatter them with sheer force.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_q335v"]
+script = ExtResource("9_7s5am")
+text = "(You crumple the bars using your %s.)"
+speed = 0.03
+sound = "hit4"
+choices = Array[String]([])
+
 [sub_resource type="Resource" id="Resource_mq224"]
 script = ExtResource("9_7s5am")
 text = "That stolen figurine is nothing at all?"
 speed = 0.03
 sound = "ring"
 choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_brqdq"]
+script = ExtResource("9_7s5am")
+text = "Why are you here? Why even bother?"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_qngp7"]
+script = ExtResource("9_7s5am")
+text = "God's realm is to the northwest. Just leave me alone."
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_g4sn6"]
+script = ExtResource("9_7s5am")
+text = "(An old man mumbles incoherently.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_i47mq"]
+script = ExtResource("9_7s5am")
+text = "... the kila ... sealed ... 3 ... protect ..."
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_px15r"]
+script = ExtResource("9_7s5am")
+text = "(It doesn't respond to anything you say.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6eftt"]
+size = Vector2(18, 24)
+
+[sub_resource type="Animation" id="Animation_o47a3"]
+resource_name = "bite"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_h2i0e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_asiws"]
+_data = {
+"RESET": SubResource("Animation_h2i0e"),
+"bite": SubResource("Animation_o47a3")
+}
 
 [sub_resource type="Resource" id="Resource_b505j"]
 script = ExtResource("9_7s5am")
@@ -107,7 +227,7 @@ choices = Array[String]([])
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_2mj4t")
-music = Array[String](["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "mundane_mystery", "haunt", "", "", "", ""])
+music = Array[String](["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""])
 
 [node name="AnimatedTileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_72mcu")
@@ -122,6 +242,7 @@ centered = false
 tile_set = SubResource("TileSet_fh817")
 collision_visibility_mode = 1
 format = 2
+layer_0/tile_data = PackedInt32Array(5898327, 65536, 0, 5898328, 65536, 0, 5832792, 65536, 0, 5832793, 65536, 0, 5832791, 65536, 0, 5898326, 65536, 0, 6094934, 65536, 0, 6094935, 65536, 0, 6094936, 65536, 0, 6160472, 65536, 0, 6160473, 65536, 0, 6226009, 65536, 0, 6226010, 65536, 0, 6226011, 65536, 0, 6226012, 65536, 0, 6160476, 65536, 0, 6160477, 65536, 0, 6094941, 65536, 0, 6094942, 65536, 0, 5832796, 65536, 0, 5832797, 65536, 0, 5898333, 65536, 0, 5898334, 65536, 0, 5898335, 65536, 0, 5898336, 65536, 0, 5898337, 65536, 0, 5898338, 65536, 0, 5898339, 65536, 0, 6094943, 65536, 0, 6094944, 65536, 0, 6094945, 65536, 0, 6094946, 65536, 0, 6094947, 65536, 0, 6160483, 65536, 0, 6226020, 65536, 0, 6160485, 65536, 0, 6094949, 65536, 0, 6094950, 65536, 0, 6160486, 65536, 0, 6226023, 65536, 0, 6160488, 65536, 0, 6094952, 65536, 0, 6094953, 65536, 0, 6160489, 65536, 0, 6226026, 65536, 0, 6160491, 65536, 0, 6094955, 65536, 0, 6094956, 65536, 0, 6160492, 65536, 0, 5898341, 65536, 0, 5898342, 65536, 0, 5898343, 65536, 0, 5832807, 65536, 0, 5767271, 65536, 0, 5701735, 65536, 0, 5636199, 65536, 0, 5570663, 65536, 0, 5374055, 65536, 0, 5374056, 65536, 0, 5374057, 65536, 0, 5374058, 65536, 0, 5374059, 65536, 0, 5374060, 65536, 0, 5374061, 65536, 0, 5374062, 65536, 0, 5374063, 65536, 0, 5374064, 65536, 0, 5374065, 65536, 0, 5374066, 65536, 0, 5374067, 65536, 0, 5374068, 65536, 0, 5374069, 65536, 0, 5374070, 65536, 0, 5374071, 65536, 0, 5374072, 65536, 0, 5439608, 65536, 0, 5505144, 65536, 0, 5570680, 65536, 0, 5570679, 65536, 0, 5570678, 65536, 0, 5570677, 65536, 0, 5570676, 65536, 0, 5570675, 65536, 0, 5570674, 65536, 0, 5570673, 65536, 0, 5570672, 65536, 0, 5570671, 65536, 0, 5570670, 65536, 0, 5570669, 65536, 0, 5570668, 65536, 0, 5570667, 65536, 0, 5570666, 65536, 0, 5636202, 65536, 0, 5701738, 65536, 0, 5767274, 65536, 0, 5832810, 65536, 0, 5898346, 65536, 0, 5898347, 65536, 0, 5898348, 65536, 0, 5832812, 65536, 0, 5767276, 65536, 0, 5767277, 65536, 0, 5767278, 65536, 0, 5832814, 65536, 0, 5898350, 65536, 0, 6094958, 65536, 0, 6160494, 65536, 0, 6226030, 65536, 0, 6226029, 65536, 0, 6226028, 65536, 0, 6226027, 65536, 0, 6226025, 65536, 0, 6226024, 65536, 0, 6226022, 65536, 0, 6226021, 65536, 0, 6226019, 65536, 0, 6094959, 65536, 0, 6094960, 65536, 0, 6094961, 65536, 0, 6094962, 65536, 0, 6094963, 65536, 0, 6094964, 65536, 0, 6094965, 65536, 0, 6094966, 65536, 0, 6094967, 65536, 0, 6094968, 65536, 0, 6094969, 65536, 0, 6094970, 65536, 0, 6094971, 65536, 0, 6094972, 65536, 0, 6094973, 65536, 0, 5898351, 65536, 0, 5898352, 65536, 0, 5898353, 65536, 0, 5898354, 65536, 0, 5898355, 65536, 0, 5898356, 65536, 0, 5898357, 65536, 0, 5898358, 65536, 0, 5898359, 65536, 0, 5898360, 65536, 0, 5898361, 65536, 0, 5898362, 65536, 0, 5898363, 65536, 0, 5898364, 65536, 0, 5898365, 65536, 0, 5832829, 65536, 0, 5767293, 65536, 0, 5701757, 65536, 0, 5636221, 65536, 0, 5570685, 65536, 0, 5505149, 65536, 0, 5439613, 65536, 0, 5374077, 65536, 0, 5308541, 65536, 0, 5308542, 65536, 0, 5308543, 65536, 0, 5308544, 65536, 0, 5308545, 65536, 0, 5308546, 65536, 0, 5308547, 65536, 0, 5308548, 65536, 0, 5308549, 65536, 0, 5308550, 65536, 0, 5308551, 65536, 0, 5308552, 65536, 0, 5308553, 65536, 0, 5308554, 65536, 0, 5308555, 65536, 0, 6160509, 65536, 0, 6226045, 65536, 0, 6226046, 65536, 0, 6226047, 65536, 0, 6226048, 65536, 0, 6226049, 65536, 0, 6226050, 65536, 0, 6226051, 65536, 0, 6226052, 65536, 0, 6226053, 65536, 0, 6226054, 65536, 0, 6226055, 65536, 0, 6226056, 65536, 0, 6226057, 65536, 0, 6226058, 65536, 0, 6160522, 65536, 0, 6094986, 65536, 0, 6029450, 65536, 0, 5963914, 65536, 0, 5898378, 65536, 0, 5832842, 65536, 0, 5767306, 65536, 0, 5701770, 65536, 0, 5636234, 65536, 0, 5701769, 65536, 0, 5767305, 65536, 0, 5570699, 65536, 0, 5636235, 65536, 0, 5374091, 65536, 0, 5374092, 65536, 0, 5374093, 65536, 0, 5570700, 65536, 0, 5570701, 65536, 0, 5832841, 65536, 0, 5898377, 65536, 0, 5963913, 65536, 0, 6029449, 65536, 0, 6094985, 65536, 0, 6160521, 65536, 0, 6160520, 65536, 0, 6160519, 65536, 0, 6160518, 65536, 0, 6160517, 65536, 0, 6160516, 65536, 0, 6160515, 65536, 0, 6160514, 65536, 0, 6160513, 65536, 0, 6160512, 65536, 0, 6160511, 65536, 0, 6160510, 65536, 0, 5898366, 65536, 0, 5832830, 65536, 0, 5767294, 65536, 0, 5701758, 65536, 0, 5636222, 65536, 0, 5570686, 65536, 0, 5505150, 65536, 0, 5439614, 65536, 0, 5374078, 65536, 0, 6094974, 65536, 0, 6094975, 65536, 0, 6094976, 65536, 0, 6094977, 65536, 0, 6094978, 65536, 0, 6094979, 65536, 0, 6094980, 65536, 0, 6094981, 65536, 0, 6094982, 65536, 0, 6094983, 65536, 0, 6094984, 65536, 0, 6029448, 65536, 0, 5963912, 65536, 0, 5898376, 65536, 0, 5832840, 65536, 0, 5767304, 65536, 0, 5701768, 65536, 0, 5832831, 65536, 0, 5832832, 65536, 0, 5832833, 65536, 0, 5767297, 65536, 0, 5767296, 65536, 0, 5767295, 65536, 0, 5701759, 65536, 0, 5701760, 65536, 0, 5701761, 65536, 0, 5767298, 65536, 0, 5832834, 65536, 0, 5701762, 65536, 0, 5832839, 65536, 0, 5767303, 65536, 0, 5701767, 65536, 0, 5570698, 65536, 0, 5570703, 65536, 0, 5570704, 65536, 0, 5636240, 65536, 0, 5636239, 65536, 0, 5701775, 65536, 0, 5701774, 65536, 0, 5701773, 65536, 0, 5636237, 65536, 0, 5701776, 65536, 0, 5767312, 65536, 0, 5767311, 65536, 0, 5767310, 65536, 0, 5832846, 65536, 0, 5898382, 65536, 0, 5963917, 65536, 0, 6029453, 65536, 0, 6094989, 65536, 0, 5963918, 65536, 0, 6160525, 65536, 0, 6226061, 65536, 0, 6226062, 65536, 0, 6226063, 65536, 0, 6226064, 65536, 0, 6226065, 65536, 0, 6160529, 65536, 0, 6160530, 65536, 0, 6226066, 65536, 0, 6029457, 65536, 0, 6029458, 65536, 0, 5963922, 65536, 0, 5963921, 65536, 0, 5963920, 65536, 0, 5898384, 65536, 0, 5898385, 65536, 0, 5898386, 65536, 0, 5767314, 65536, 0, 5701778, 65536, 0, 5636242, 65536, 0, 5570706, 65536, 0, 5570707, 65536, 0, 5636243, 65536, 0, 5701779, 65536, 0, 5701780, 65536, 0, 5701781, 65536, 0, 5636245, 65536, 0, 5570709, 65536, 0, 5570710, 65536, 0, 5636246, 65536, 0, 5701782, 65536, 0, 5701783, 65536, 0, 5701784, 65536, 0, 5636248, 65536, 0, 5570712, 65536, 0, 5505176, 65536, 0, 5439640, 65536, 0, 5374104, 65536, 0, 5308568, 65536, 0, 5243032, 65536, 0, 5243031, 65536, 0, 5243030, 65536, 0, 5308566, 65536, 0, 5374102, 65536, 0, 5374101, 65536, 0, 5308565, 65536, 0, 5243029, 65536, 0, 5243028, 65536, 0, 5243027, 65536, 0, 5308563, 65536, 0, 5374099, 65536, 0, 5374098, 65536, 0, 5374097, 65536, 0, 5374096, 65536, 0, 5374095, 65536, 0, 5308559, 65536, 0, 5243023, 65536, 0, 5243022, 65536, 0, 5243021, 65536, 0, 5308557, 65536, 0)
 
 [node name="HealthMachine" parent="." instance=ExtResource("3_h7vba")]
 position = Vector2(543, 549)
@@ -137,18 +258,18 @@ position = Vector2(159, 507)
 
 [node name="CacheBox" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(603, 567)
-item = "Gold"
-count = 5
+item = "Soma"
+count = 1
 
 [node name="CacheBox2" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(657, 567)
 item = "Gold"
-count = 5
+count = 10
 
 [node name="CacheBox3" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(657, 537)
-item = "Gold"
-count = 5
+item = "Soma"
+count = 1
 
 [node name="CacheBox4" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(603, 537)
@@ -157,8 +278,8 @@ count = 5
 
 [node name="CacheBox5" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(603, 537)
-item = "Gold"
-count = 5
+item = "Bomb"
+count = 1
 
 [node name="CacheBox6" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(627, 555)
@@ -288,12 +409,22 @@ count = 5
 [node name="CacheBox35" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(675, 507)
 item = "Gold"
-count = 5
+count = 10
 
 [node name="CacheBox36" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(657, 501)
 item = "Gold"
 count = 5
+
+[node name="CacheBox40" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(855, 519)
+item = "Gold"
+count = 10
+
+[node name="CacheBox41" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(891, 489)
+item = "Soma"
+count = 1
 
 [node name="CacheBox37" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(843, 225)
@@ -351,12 +482,57 @@ shape = SubResource("RectangleShape2D_1lbwn")
 texture = ExtResource("9_qk1l6")
 
 [node name="Barrier" parent="." instance=ExtResource("11_hsppn")]
-position = Vector2(543, 537)
+position = Vector2(603, 561)
 convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_emllv"), SubResource("Resource_un7h8")])
 success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_mbobe")])
-min_stat = 1
+min_stat = 5
 
 [node name="Sprite2D" parent="Barrier" index="1"]
+texture = ExtResource("12_w10b3")
+
+[node name="Barrier6" parent="." instance=ExtResource("11_hsppn")]
+position = Vector2(621, 561)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_jdn87"), SubResource("Resource_a5f7f")])
+success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_1wi2j")])
+min_stat = 5
+
+[node name="Sprite2D" parent="Barrier6" index="1"]
+texture = ExtResource("12_w10b3")
+
+[node name="Barrier2" parent="." instance=ExtResource("11_hsppn")]
+position = Vector2(603, 543)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_emllv"), SubResource("Resource_un7h8")])
+success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_mbobe")])
+min_stat = 5
+
+[node name="Sprite2D" parent="Barrier2" index="1"]
+texture = ExtResource("12_w10b3")
+
+[node name="Barrier3" parent="." instance=ExtResource("11_hsppn")]
+position = Vector2(657, 561)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_emllv"), SubResource("Resource_un7h8")])
+success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_mbobe")])
+min_stat = 5
+
+[node name="Sprite2D" parent="Barrier3" index="1"]
+texture = ExtResource("12_w10b3")
+
+[node name="Barrier4" parent="." instance=ExtResource("11_hsppn")]
+position = Vector2(633, 543)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_u114e"), SubResource("Resource_dmv7f")])
+success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_q335v")])
+min_stat = 10
+
+[node name="Sprite2D" parent="Barrier4" index="1"]
+texture = ExtResource("12_w10b3")
+
+[node name="Barrier5" parent="." instance=ExtResource("11_hsppn")]
+position = Vector2(627, 543)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_u114e"), SubResource("Resource_dmv7f")])
+success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_q335v")])
+min_stat = 10
+
+[node name="Sprite2D" parent="Barrier5" index="1"]
 texture = ExtResource("12_w10b3")
 
 [node name="Angel4" parent="." instance=ExtResource("8_0pq14")]
@@ -368,6 +544,40 @@ shape = SubResource("RectangleShape2D_1lbwn")
 
 [node name="Sprite2D" type="Sprite2D" parent="Angel4"]
 texture = ExtResource("9_qk1l6")
+
+[node name="Character" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(621, 567)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_brqdq"), SubResource("Resource_qngp7")])
+
+[node name="Sprite2D" type="Sprite2D" parent="Character"]
+texture = ExtResource("13_r66my")
+
+[node name="Character2" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(639, 567)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_g4sn6"), SubResource("Resource_i47mq")])
+
+[node name="Sprite2D" type="Sprite2D" parent="Character2"]
+texture = ExtResource("13_r66my")
+
+[node name="Character3" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(783, 501)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_px15r")])
+
+[node name="Sprite2D" type="Sprite2D" parent="Character3"]
+position = Vector2(-6, -2)
+texture = ExtResource("14_ww5jb")
+hframes = 4
+
+[node name="CollisionShape2D" parent="Character3" index="1"]
+position = Vector2(-6, -3)
+shape = SubResource("RectangleShape2D_6eftt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Character3"]
+libraries = {
+"": SubResource("AnimationLibrary_asiws")
+}
+autoplay = "bite"
+speed_scale = 1.5
 
 [node name="Angel3" parent="." instance=ExtResource("8_0pq14")]
 position = Vector2(630, 468)
@@ -382,5 +592,13 @@ texture = ExtResource("9_qk1l6")
 [editable path="Angel"]
 [editable path="Angel2"]
 [editable path="Barrier"]
+[editable path="Barrier6"]
+[editable path="Barrier2"]
+[editable path="Barrier3"]
+[editable path="Barrier4"]
+[editable path="Barrier5"]
 [editable path="Angel4"]
+[editable path="Character"]
+[editable path="Character2"]
+[editable path="Character3"]
 [editable path="Angel3"]

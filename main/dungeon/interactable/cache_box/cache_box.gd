@@ -10,6 +10,9 @@ func _ready() -> void:
 	custom_id = name
 	if custom_id in Status.player_stats.flags:
 		queue_free()
+	convo = convo.duplicate(true)
+	for i in range(len(convo)):
+		convo[i] = convo[i].duplicate(true)
 
 func interact(player: Player) -> void:
 	if item == "Gold":
