@@ -28,12 +28,16 @@ func interact(player: Player) -> void:
 	await Ref.textbox.trans_in()
 	await Ref.textbox.convo(convo)
 	if Status.player_stats.get(stat.to_lower()) < min_stat:
-		fail_convo[0].text = fail_convo[0].text % [min_stat, stat] 
+		var old: String = fail_convo[-1].text
+		fail_convo[-1].text = fail_convo[-1].text % [min_stat, stat] 
 		await Ref.textbox.convo(fail_convo)
+		fail_convo[-1].text = old
 	else:
 		Status.player_stats.flags[custom_id] = true
-		success_convo[0].text = success_convo[0].text % stat
+		var old: String = success_convo[-1].text
+		success_convo[-1].text = success_convo[-1].text % stat
 		await Ref.textbox.convo(success_convo)
+		success_convo[-1].text = old
 	await Ref.textbox.trans_out()
 	if custom_id in Status.player_stats.flags:
 		queue_free()

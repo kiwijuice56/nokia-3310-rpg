@@ -19,7 +19,7 @@ func interact(player: Player) -> void:
 		count = round(count * (randf_range(0.9, 1.2) + (Status.player_stats.wisdom / 7.0)))
 		
 	
-	convo[1].text = "(Inside, you find %d %s)." % [count, item] 
+	convo[1].text = "(Inside, you find %d %s.)" % [count, item] 
 	player.can_move = false
 	await Ref.textbox.trans_in()
 	await Ref.textbox.convo(convo)

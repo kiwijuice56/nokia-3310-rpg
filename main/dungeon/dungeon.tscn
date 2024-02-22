@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://oah07b5k8nlo"]
+[gd_scene load_steps=63 format=3 uid="uid://oah07b5k8nlo"]
 
 [ext_resource type="Script" path="res://main/dungeon/dungeon.gd" id="1_2mj4t"]
 [ext_resource type="Texture2D" uid="uid://d2yuqetc4xpj1" path="res://main/dungeon/pair_block.png" id="2_b01mh"]
@@ -10,10 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://2nayajefompd" path="res://main/dungeon/interactable/character/character.tscn" id="8_0pq14"]
 [ext_resource type="Script" path="res://main/ui/textbox/line.gd" id="9_7s5am"]
 [ext_resource type="Texture2D" uid="uid://btx4vrqd2r0ks" path="res://main/dungeon/interactable/character/angel.png" id="9_qk1l6"]
+[ext_resource type="Texture2D" uid="uid://dejd7kh476v77" path="res://main/dungeon/interactable/character/mutant.png" id="11_5id44"]
 [ext_resource type="PackedScene" uid="uid://b3kb1judf4iw2" path="res://main/dungeon/interactable/barrier/barrier.tscn" id="11_hsppn"]
 [ext_resource type="Texture2D" uid="uid://cvk5g61780ury" path="res://main/dungeon/interactable/barrier/bars.png" id="12_w10b3"]
+[ext_resource type="Texture2D" uid="uid://bq45wp44u71ka" path="res://main/dungeon/interactable/barrier/trap.png" id="13_qp0sf"]
 [ext_resource type="Texture2D" uid="uid://bw3mys5rkq3x3" path="res://main/dungeon/interactable/character/person.png" id="13_r66my"]
 [ext_resource type="Texture2D" uid="uid://b5kicna0xj00o" path="res://main/dungeon/interactable/character/creature.png" id="14_ww5jb"]
+[ext_resource type="Texture2D" uid="uid://vcl8go3ul5f7" path="res://main/dungeon/interactable/barrier/puzzle.png" id="15_p4mps"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s33bo"]
 texture = ExtResource("6_7ewyj")
@@ -64,6 +67,79 @@ choices = Array[String]([])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lbwn"]
 size = Vector2(12, 12)
+
+[sub_resource type="Resource" id="Resource_5m1kn"]
+script = ExtResource("9_7s5am")
+text = "(The colossal being gnaws on the grass with its trunk.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_mw08c"]
+script = ExtResource("9_7s5am")
+text = "gnnooaAarrr..."
+speed = 0.03
+sound = "negative1"
+choices = Array[String]([])
+
+[sub_resource type="Animation" id="Animation_ue2rm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_y32q7"]
+resource_name = "frolic"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_18g4l"]
+_data = {
+"RESET": SubResource("Animation_ue2rm"),
+"frolic": SubResource("Animation_y32q7")
+}
+
+[sub_resource type="Resource" id="Resource_sk7b6"]
+script = ExtResource("9_7s5am")
+text = "youUu... f-friend?"
+speed = 0.03
+sound = "negative1"
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_wqwuy"]
+script = ExtResource("9_7s5am")
+text = "..."
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_op5b5"]
+script = ExtResource("9_7s5am")
+text = "(It's not moving.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_0pnhc"]
 script = ExtResource("9_7s5am")
@@ -135,6 +211,62 @@ speed = 0.03
 sound = "hit4"
 choices = Array[String]([])
 
+[sub_resource type="Resource" id="Resource_ger2j"]
+script = ExtResource("9_7s5am")
+text = "(Dozens of fleshy tendrils block the path.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_cq2db"]
+script = ExtResource("9_7s5am")
+text = "(You try to carefully cut them by their roots.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_6q37n"]
+script = ExtResource("9_7s5am")
+text = "(But the flesh quickly regenerates due to your imprecise cut.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_5q1wt"]
+script = ExtResource("9_7s5am")
+text = "(It looks like you need %d %s for that...)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_v70d8"]
+script = ExtResource("9_7s5am")
+text = "(Your blade cleaves through the tendrils thanks to your %s.)"
+speed = 0.03
+sound = "hit4"
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_kslk0"]
+script = ExtResource("9_7s5am")
+text = "(A cube with dozens of wires spewing from its sides blocks the path.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_nwhlt"]
+script = ExtResource("9_7s5am")
+text = "(You try to rearrange the wires in hopes of disabling the barrier.)"
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_nqcek"]
+script = ExtResource("9_7s5am")
+text = "(Thanks to your %s, you find the terminal wire and disable the cube.)"
+speed = 0.03
+sound = "hit4"
+choices = Array[String]([])
+
 [sub_resource type="Resource" id="Resource_mq224"]
 script = ExtResource("9_7s5am")
 text = "That stolen figurine is nothing at all?"
@@ -152,6 +284,13 @@ choices = Array[String]([])
 [sub_resource type="Resource" id="Resource_qngp7"]
 script = ExtResource("9_7s5am")
 text = "God's realm is to the northwest. Just leave me alone."
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_v2lt3"]
+script = ExtResource("9_7s5am")
+text = "Thank you..."
 speed = 0.03
 sound = ""
 choices = Array[String]([])
@@ -180,6 +319,21 @@ choices = Array[String]([])
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6eftt"]
 size = Vector2(18, 24)
 
+[sub_resource type="Animation" id="Animation_h2i0e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_o47a3"]
 resource_name = "bite"
 length = 0.8
@@ -195,21 +349,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
-}
-
-[sub_resource type="Animation" id="Animation_h2i0e"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_asiws"]
@@ -288,6 +427,21 @@ count = 5
 
 [node name="CacheBox7" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(543, 507)
+item = "Gold"
+count = 5
+
+[node name="CacheBox42" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(375, 453)
+item = "Gold"
+count = 5
+
+[node name="CacheBox43" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(357, 447)
+item = "Gold"
+count = 5
+
+[node name="CacheBox44" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(428, 501)
 item = "Gold"
 count = 5
 
@@ -471,6 +625,79 @@ shape = SubResource("RectangleShape2D_1lbwn")
 [node name="Sprite2D" type="Sprite2D" parent="Angel"]
 texture = ExtResource("9_qk1l6")
 
+[node name="Angel5" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(456, 540)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_5m1kn"), SubResource("Resource_mw08c")])
+
+[node name="CollisionShape2D" parent="Angel5" index="0"]
+shape = SubResource("RectangleShape2D_1lbwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Angel5"]
+texture = ExtResource("11_5id44")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Angel5"]
+libraries = {
+"": SubResource("AnimationLibrary_18g4l")
+}
+autoplay = "frolic"
+
+[node name="Angel6" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(390, 558)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_5m1kn"), SubResource("Resource_sk7b6")])
+
+[node name="CollisionShape2D" parent="Angel6" index="0"]
+shape = SubResource("RectangleShape2D_1lbwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Angel6"]
+texture = ExtResource("11_5id44")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Angel6"]
+libraries = {
+"": SubResource("AnimationLibrary_18g4l")
+}
+autoplay = "frolic"
+
+[node name="Angel7" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(366, 510)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_5m1kn"), SubResource("Resource_wqwuy")])
+
+[node name="CollisionShape2D" parent="Angel7" index="0"]
+shape = SubResource("RectangleShape2D_1lbwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Angel7"]
+texture = ExtResource("11_5id44")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Angel7"]
+libraries = {
+"": SubResource("AnimationLibrary_18g4l")
+}
+autoplay = "frolic"
+
+[node name="Angel8" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(492, 444)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_op5b5")])
+
+[node name="CollisionShape2D" parent="Angel8" index="0"]
+shape = SubResource("RectangleShape2D_1lbwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Angel8"]
+texture = ExtResource("11_5id44")
+hframes = 4
+
+[node name="Angel9" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(480, 456)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_op5b5")])
+
+[node name="CollisionShape2D" parent="Angel9" index="0"]
+shape = SubResource("RectangleShape2D_1lbwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Angel9"]
+texture = ExtResource("11_5id44")
+hframes = 4
+
 [node name="Angel2" parent="." instance=ExtResource("8_0pq14")]
 position = Vector2(546, 444)
 convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_0pnhc"), SubResource("Resource_00qfi")])
@@ -526,6 +753,55 @@ min_stat = 10
 [node name="Sprite2D" parent="Barrier4" index="1"]
 texture = ExtResource("12_w10b3")
 
+[node name="Barrier7" parent="." instance=ExtResource("11_hsppn")]
+position = Vector2(855, 513)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_u114e"), SubResource("Resource_dmv7f")])
+success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_q335v")])
+min_stat = 10
+
+[node name="Sprite2D" parent="Barrier7" index="1"]
+texture = ExtResource("12_w10b3")
+
+[node name="Barrier8" parent="." instance=ExtResource("11_hsppn")]
+position = Vector2(891, 495)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_u114e"), SubResource("Resource_dmv7f")])
+success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_q335v")])
+min_stat = 10
+
+[node name="Sprite2D" parent="Barrier8" index="1"]
+texture = ExtResource("12_w10b3")
+
+[node name="Barrier9" parent="." instance=ExtResource("11_hsppn")]
+position = Vector2(909, 513)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_u114e"), SubResource("Resource_dmv7f")])
+success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_q335v")])
+min_stat = 10
+
+[node name="Sprite2D" parent="Barrier9" index="1"]
+texture = ExtResource("12_w10b3")
+
+[node name="Barrier10" parent="." instance=ExtResource("11_hsppn")]
+position = Vector2(951, 567)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_ger2j"), SubResource("Resource_cq2db")])
+fail_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_6q37n"), SubResource("Resource_5q1wt")])
+success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_v70d8")])
+min_stat = 5
+stat = "Dexterity"
+
+[node name="Sprite2D" parent="Barrier10" index="1"]
+texture = ExtResource("13_qp0sf")
+
+[node name="Barrier11" parent="." instance=ExtResource("11_hsppn")]
+position = Vector2(795, 441)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_ger2j"), SubResource("Resource_cq2db")])
+fail_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_6q37n"), SubResource("Resource_5q1wt")])
+success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_v70d8")])
+min_stat = 5
+stat = "Dexterity"
+
+[node name="Sprite2D" parent="Barrier11" index="1"]
+texture = ExtResource("13_qp0sf")
+
 [node name="Barrier5" parent="." instance=ExtResource("11_hsppn")]
 position = Vector2(627, 543)
 convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_u114e"), SubResource("Resource_dmv7f")])
@@ -534,6 +810,16 @@ min_stat = 10
 
 [node name="Sprite2D" parent="Barrier5" index="1"]
 texture = ExtResource("12_w10b3")
+
+[node name="Barrier12" parent="." instance=ExtResource("11_hsppn")]
+position = Vector2(345, 561)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_kslk0"), SubResource("Resource_nwhlt")])
+success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_nqcek")])
+min_stat = 5
+stat = "Wisdom"
+
+[node name="Sprite2D" parent="Barrier12" index="1"]
+texture = ExtResource("15_p4mps")
 
 [node name="Angel4" parent="." instance=ExtResource("8_0pq14")]
 position = Vector2(798, 468)
@@ -552,6 +838,13 @@ convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_brqdq"), SubResourc
 [node name="Sprite2D" type="Sprite2D" parent="Character"]
 texture = ExtResource("13_r66my")
 
+[node name="Character4" parent="." instance=ExtResource("8_0pq14")]
+position = Vector2(909, 519)
+convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_v2lt3")])
+
+[node name="Sprite2D" type="Sprite2D" parent="Character4"]
+texture = ExtResource("13_r66my")
+
 [node name="Character2" parent="." instance=ExtResource("8_0pq14")]
 position = Vector2(639, 567)
 convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_g4sn6"), SubResource("Resource_i47mq")])
@@ -563,14 +856,14 @@ texture = ExtResource("13_r66my")
 position = Vector2(783, 501)
 convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_px15r")])
 
+[node name="CollisionShape2D" parent="Character3" index="0"]
+position = Vector2(-6, -3)
+shape = SubResource("RectangleShape2D_6eftt")
+
 [node name="Sprite2D" type="Sprite2D" parent="Character3"]
 position = Vector2(-6, -2)
 texture = ExtResource("14_ww5jb")
 hframes = 4
-
-[node name="CollisionShape2D" parent="Character3" index="1"]
-position = Vector2(-6, -3)
-shape = SubResource("RectangleShape2D_6eftt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Character3"]
 libraries = {
@@ -590,15 +883,27 @@ shape = SubResource("RectangleShape2D_1lbwn")
 texture = ExtResource("9_qk1l6")
 
 [editable path="Angel"]
+[editable path="Angel5"]
+[editable path="Angel6"]
+[editable path="Angel7"]
+[editable path="Angel8"]
+[editable path="Angel9"]
 [editable path="Angel2"]
 [editable path="Barrier"]
 [editable path="Barrier6"]
 [editable path="Barrier2"]
 [editable path="Barrier3"]
 [editable path="Barrier4"]
+[editable path="Barrier7"]
+[editable path="Barrier8"]
+[editable path="Barrier9"]
+[editable path="Barrier10"]
+[editable path="Barrier11"]
 [editable path="Barrier5"]
+[editable path="Barrier12"]
 [editable path="Angel4"]
 [editable path="Character"]
+[editable path="Character4"]
 [editable path="Character2"]
 [editable path="Character3"]
 [editable path="Angel3"]

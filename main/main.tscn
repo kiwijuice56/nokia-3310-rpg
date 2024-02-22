@@ -67,7 +67,7 @@ position = Vector2(549, 549)
 texture = ExtResource("2_ohveo")
 hframes = 2
 script = ExtResource("3_adq4t")
-move_time = 0.16
+move_time = 0.05
 
 [node name="RayCast2D" type="RayCast2D" parent="Player"]
 target_position = Vector2(0, 5.5)
