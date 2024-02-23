@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://0xftdh02vd6x"]
+
+[ext_resource type="Script" path="res://main/dungeon/fight/enemy.gd" id="1_3chgv"]
+[ext_resource type="Texture2D" uid="uid://dtjr6chv7csru" path="res://main/dungeon/fight/sprites/fight_angel.png" id="2_qmcmm"]
+
+[resource]
+script = ExtResource("1_3chgv")
+life = 10
+attack = 2
+display_name = "Seraph"
+attack_description = "It tore you from limb to limb!"
+drop = "Gold"
+drop_count = 8
+sprite = ExtResource("2_qmcmm")

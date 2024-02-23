@@ -1,12 +1,176 @@
-[gd_scene load_steps=12 format=3 uid="uid://ddaipsajw5f5l"]
+[gd_scene load_steps=25 format=3 uid="uid://ddaipsajw5f5l"]
 
 [ext_resource type="PackedScene" uid="uid://bsdm2cw8dhp2u" path="res://main/ui/textbox/textbox.tscn" id="1_sd6xj"]
+[ext_resource type="Script" path="res://main/main.gd" id="1_sjoxm"]
 [ext_resource type="Shader" path="res://main/inverse.gdshader" id="2_dld3a"]
 [ext_resource type="PackedScene" uid="uid://db3nvolhew0oi" path="res://main/ui/statbox/statbox.tscn" id="2_ef371"]
 [ext_resource type="Texture2D" uid="uid://btjolkgqpae0" path="res://main/dungeon/player/player.png" id="2_ohveo"]
 [ext_resource type="PackedScene" uid="uid://oah07b5k8nlo" path="res://main/dungeon/dungeon.tscn" id="2_qqib1"]
 [ext_resource type="Script" path="res://main/dungeon/player/player.gd" id="3_adq4t"]
+[ext_resource type="Theme" uid="uid://cwrkv7lqfv2jk" path="res://main/ui/theme.tres" id="4_4lmjv"]
 [ext_resource type="PackedScene" uid="uid://doejr0rb0c3oh" path="res://main/ui/itembox/itembox.tscn" id="5_p5lcg"]
+[ext_resource type="Texture2D" uid="uid://dtjr6chv7csru" path="res://main/dungeon/fight/sprites/fight_angel.png" id="6_nquky"]
+[ext_resource type="Script" path="res://main/fight_manager.gd" id="11_7ij1p"]
+[ext_resource type="Resource" uid="uid://0xftdh02vd6x" path="res://main/dungeon/fight/angel.tres" id="12_v6mow"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07i4m"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="Animation" id="Animation_i4esw"]
+resource_name = "hurt"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-5, -3), Vector2(4, -1), Vector2(-3, 2), Vector2(2, -1), Vector2(1, -1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_l8g8a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g8g02"]
+resource_name = "bomb"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-7, -5), Vector2(6, -3), Vector2(-3, 3), Vector2(2, -1), Vector2(1, -1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_gs1vi"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-2, 2), Vector2(2, -2), Vector2(1, 2), Vector2(-1, -2), Vector2(0, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l6dgw"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_87v8w"]
+_data = {
+"RESET": SubResource("Animation_l8g8a"),
+"attack": SubResource("Animation_gs1vi"),
+"bomb": SubResource("Animation_g8g02"),
+"hurt": SubResource("Animation_i4esw"),
+"idle": SubResource("Animation_l6dgw")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hlk8d"]
+content_margin_left = 2.0
+content_margin_top = 1.0
+content_margin_right = 2.0
+content_margin_bottom = 1.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.529412, 0.568627, 0.533333, 1)
+anti_aliasing = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o3yem"]
 shader = ExtResource("2_dld3a")
@@ -50,6 +214,7 @@ _data = {
 }
 
 [node name="Main" type="Node"]
+script = ExtResource("1_sjoxm")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -59,7 +224,98 @@ _data = {
 
 [node name="ItemBox" parent="UI" instance=ExtResource("5_p5lcg")]
 
+[node name="FightMenu" type="PanelContainer" parent="UI"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_4lmjv")
+theme_override_styles/panel = SubResource("StyleBoxFlat_07i4m")
+
+[node name="EnemySprite" type="Sprite2D" parent="UI/FightMenu"]
+unique_name_in_owner = true
+position = Vector2(41, 28)
+texture = ExtResource("6_nquky")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/FightMenu/EnemySprite"]
+libraries = {
+"": SubResource("AnimationLibrary_87v8w")
+}
+speed_scale = 1.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/FightMenu"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/FightMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hlk8d")
+
+[node name="OptionContainer" type="GridContainer" parent="UI/FightMenu/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/v_separation = -1
+columns = 2
+
+[node name="AttackLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+text = "attack<"
+
+[node name="RunLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+text = "run"
+
+[node name="SomaLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+text = "soma x0"
+
+[node name="BombLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+text = "bomb x9"
+
+[node name="InfoLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_constants/line_spacing = -1
+text = "the angel dealt 99 damage!"
+autowrap_mode = 2
+visible_characters_behavior = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/FightMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/margin_left = 1
+
+[node name="FightLifeLabel" type="Label" parent="UI/FightMenu/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+text = "life: 99/99"
+
 [node name="Dungeon" parent="." instance=ExtResource("2_qqib1")]
+encounter_difficulty = Array[int]([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
 [node name="Player" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_o3yem")
@@ -81,3 +337,7 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(546, 552)
+
+[node name="FightManager" type="Node" parent="."]
+script = ExtResource("11_7ij1p")
+encounters = Array[Array]([[ExtResource("12_v6mow")]])
