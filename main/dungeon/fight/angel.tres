@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_3chgv")
-life = 10
-attack = 2
+life = 9
+strength = 2
 display_name = "Seraph"
 attack_description = "It tore you from limb to limb!"
 drop = "Gold"

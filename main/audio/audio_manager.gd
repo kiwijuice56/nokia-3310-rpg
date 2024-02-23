@@ -20,6 +20,7 @@ func _ready() -> void:
 	sounds["negative1"] = preload("res://main/audio/sfx/negative1.wav")
 	sounds["attack"] = preload("res://main/audio/sfx/attack.wav")
 	sounds["bomb"] = preload("res://main/audio/sfx/bomb.wav")
+	sounds["win"] = preload("res://main/audio/sfx/win.wav")
 	
 	loaded = true
 
