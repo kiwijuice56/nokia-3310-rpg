@@ -9,3 +9,4 @@ extends Resource
 @export var drop: String
 @export var drop_count: int
 @export var sprite: Texture2D
+@export var anim: String = "idle"

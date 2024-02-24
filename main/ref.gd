@@ -1,5 +1,6 @@
 extends Node
 
+@onready var ui = get_tree().get_root().get_node("Main/Screen/UI")
 @onready var textbox: TextBox = get_tree().get_root().get_node("Main/Screen/UI/TextBox")
 @onready var statbox: StatBox = get_tree().get_root().get_node("Main/Screen/UI/StatBox")
 @onready var itembox: ItemBox = get_tree().get_root().get_node("Main/Screen/UI/ItemBox")

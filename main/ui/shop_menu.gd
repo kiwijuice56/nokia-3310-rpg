@@ -78,7 +78,7 @@ func shop() -> void:
 			Status.player_stats.items["Gold"] -= Status.player_stats.shop_prices[index]
 			var stat: String = ["max_life", "strength", "dexterity", "wisdom"][index]
 			Status.player_stats.set(stat, Status.player_stats.get(stat) + 1)
-			Status.player_stats.shop_prices[index] += 2
+			Status.player_stats.shop_prices[index] += 3
 			AudioManager.stop_sound("good1")
 			AudioManager.play_sound("good1", 2)
 			update_prices()

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://0xftdh02vd6x"]
 
-[ext_resource type="Script" path="res://main/enemy.gd" id="1_3chgv"]
+[ext_resource type="Script" path="res://main/fight/enemy.gd" id="1_3chgv"]
 [ext_resource type="Texture2D" uid="uid://dtjr6chv7csru" path="res://main/fight/sprites/fight_angel.png" id="2_qmcmm"]
 
 [resource]

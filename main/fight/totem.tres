@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://3llug2b0qnqe"]
 
-[ext_resource type="Script" path="res://main/enemy.gd" id="1_xvkcv"]
+[ext_resource type="Script" path="res://main/fight/enemy.gd" id="1_xvkcv"]
 [ext_resource type="Texture2D" uid="uid://bpj6ij6ujhg4g" path="res://main/fight/sprites/fight_manikin.png" id="2_p3gdw"]
 
 [resource]

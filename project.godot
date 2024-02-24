@@ -78,7 +78,7 @@ environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 
 color_palette_dark={
 "type": "color",
-"value": Color(0, 0, 0, 1)
+"value": Color(0.101961, 0.0980392, 0.0784314, 1)
 }
 color_palette_light={
 "type": "color",

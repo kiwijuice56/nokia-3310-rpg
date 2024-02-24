@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://d0s1wcbbkn2dx"]
 
-[ext_resource type="Script" path="res://main/enemy.gd" id="1_awoe6"]
+[ext_resource type="Script" path="res://main/fight/enemy.gd" id="1_awoe6"]
 [ext_resource type="Texture2D" uid="uid://0aw8jyj8hjd4" path="res://main/fight/sprites/fight_slime.png" id="2_6ffnd"]
 
 [resource]

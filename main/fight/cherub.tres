@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://cchrld6oh82ie"]
+
+[ext_resource type="Script" path="res://main/fight/enemy.gd" id="1_i67df"]
+[ext_resource type="Texture2D" uid="uid://b6vx460oewwk" path="res://main/fight/sprites/fight_cherubim.png" id="2_plddf"]
+
+[resource]
+script = ExtResource("1_i67df")
+life = 29
+strength = 8
+display_name = "Cherub"
+attack_description = "It sends a burst of flames!"
+encounter_description = "A cherub descends towards you."
+drop = "Gold"
+drop_count = 14
+sprite = ExtResource("2_plddf")

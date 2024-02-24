@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://d3bwo0k6bi4lp"]
+
+[ext_resource type="Script" path="res://main/fight/enemy.gd" id="1_5ilxj"]
+[ext_resource type="Texture2D" uid="uid://bv18pwuvi7613" path="res://main/fight/sprites/fight_corpse.png" id="2_ky6kh"]
+
+[resource]
+script = ExtResource("1_5ilxj")
+life = 7
+strength = 4
+display_name = "Corpse"
+attack_description = "It sends body parts flying!"
+encounter_description = "A dismembered corpse animates iteslf."
+drop = "Gold"
+drop_count = 6
+sprite = ExtResource("2_ky6kh")
+anim = "idle_2"

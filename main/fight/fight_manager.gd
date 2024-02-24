@@ -55,7 +55,7 @@ func fight() -> void:
 	%FightMenu.visible = true
 	%EnemySprite.visible = true
 	%EnemySprite.texture = encounter.sprite
-	%EnemySprite/AnimationPlayer.play("idle")
+	%EnemySprite/AnimationPlayer.play(encounter.anim)
 	AudioManager.play_sound("negative1", 2)
 	
 	var timer = get_tree().create_timer(1.0)
@@ -157,23 +157,32 @@ func fight() -> void:
 		await %EnemySprite/AnimationPlayer.animation_finished
 		timer = get_tree().create_timer(0.6)
 		await timer.timeout
-		%EnemySprite/AnimationPlayer.play("idle")
+		%EnemySprite/AnimationPlayer.play(encounter.anim)
 	
 	if encounter.life <= 0:
 		%EnemySprite.visible = false
-	
-	#AudioManager.stop_sound("battle")
-	%InfoLabel.text = "... and you succeed!" if ran else "The creature stopped breathing!"
-	AudioManager.play_sound("win", 4)
-	
-	timer = get_tree().create_timer(1.5)
-	await timer.timeout
-	
-	if not ran:
-		%InfoLabel.text = "In its corpse, you find %d %s" % [encounter.drop_count, encounter.drop]
+	if Status.player_stats.life <= 0:
+		AudioManager.play_sound("hit5", 2)
+		%InfoLabel.text = "You died..."
+		Ref.player.reset()
 		timer = get_tree().create_timer(1.5)
 		await timer.timeout
-		Status.player_stats.items[encounter.drop] += encounter.drop_count 
+		Ref.ui.get_node("Death").visible = true
+		timer = get_tree().create_timer(2.5)
+		await timer.timeout
+		Ref.ui.get_node("Death").visible = false
+	else:
+		%InfoLabel.text = "... and you succeed!" if ran else "The creature stopped breathing!"
+		AudioManager.play_sound("win", 4)
+		
+		timer = get_tree().create_timer(1.5)
+		await timer.timeout
+		
+		if not ran:
+			%InfoLabel.text = "In its corpse, you find %d %s" % [encounter.drop_count, encounter.drop]
+			timer = get_tree().create_timer(1.5)
+			await timer.timeout
+			Status.player_stats.items[encounter.drop] += encounter.drop_count 
 	
 	%FightMenu.visible = false
 	Ref.player.can_move = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://ddaipsajw5f5l"]
+[gd_scene load_steps=56 format=3 uid="uid://ddaipsajw5f5l"]
 
 [ext_resource type="PackedScene" uid="uid://bsdm2cw8dhp2u" path="res://main/ui/textbox/textbox.tscn" id="1_sd6xj"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_sjoxm"]
@@ -17,10 +17,13 @@
 [ext_resource type="Resource" uid="uid://d0s1wcbbkn2dx" path="res://main/fight/slime.tres" id="13_pt4s2"]
 [ext_resource type="Resource" uid="uid://cxomg0yl7r344" path="res://main/fight/flagella.tres" id="14_y4hq0"]
 [ext_resource type="Resource" uid="uid://dqbib3mqvgfe4" path="res://main/fight/poles.tres" id="15_y16h1"]
+[ext_resource type="Resource" uid="uid://d3bwo0k6bi4lp" path="res://main/fight/corpse.tres" id="16_d0ls8"]
 [ext_resource type="Resource" uid="uid://5sa0ovyym2v3" path="res://main/fight/crystal.tres" id="16_ogxuw"]
 [ext_resource type="Resource" uid="uid://3llug2b0qnqe" path="res://main/fight/totem.tres" id="17_m5yok"]
 [ext_resource type="Resource" uid="uid://cpe3lf1if6jx2" path="res://main/fight/plant.tres" id="18_1ew7n"]
+[ext_resource type="Resource" uid="uid://bv8832n6hbulw" path="res://main/fight/flagellum.tres" id="18_obgsu"]
 [ext_resource type="Resource" uid="uid://qyvqdo6kgb05" path="res://main/fight/mistake.tres" id="19_4piv5"]
+[ext_resource type="Resource" uid="uid://cchrld6oh82ie" path="res://main/fight/cherub.tres" id="23_js5cw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07i4m"]
 content_margin_left = 0.0
@@ -159,13 +162,31 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_exwic"]
+resource_name = "idle_2"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_87v8w"]
 _data = {
 "RESET": SubResource("Animation_l8g8a"),
 "attack": SubResource("Animation_gs1vi"),
 "bomb": SubResource("Animation_g8g02"),
 "hurt": SubResource("Animation_i4esw"),
-"idle": SubResource("Animation_l6dgw")
+"idle": SubResource("Animation_l6dgw"),
+"idle_2": SubResource("Animation_exwic")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hlk8d"]
@@ -409,12 +430,9 @@ visible = false
 
 [node name="FightMenu" type="PanelContainer" parent="Screen/UI"]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 84.0
-offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -645,6 +663,15 @@ size_flags_vertical = 10
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 text = "Gold: 999"
 
+[node name="Death" type="ColorRect" parent="Screen/UI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="Dungeon" parent="Screen" instance=ExtResource("2_qqib1")]
 encounter_difficulty = Array[int]([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
@@ -671,7 +698,7 @@ position = Vector2(546, 552)
 
 [node name="FightManager" type="Node" parent="Screen"]
 script = ExtResource("11_7ij1p")
-encounters = Array[Array]([[], [ExtResource("12_v6mow"), ExtResource("13_pt4s2")], [ExtResource("14_y4hq0")], [ExtResource("15_y16h1")], [ExtResource("16_ogxuw")], [ExtResource("17_m5yok")], [ExtResource("18_1ew7n")], [ExtResource("19_4piv5")], [ExtResource("13_7m41y")]])
+encounters = Array[Array]([[], [ExtResource("12_v6mow"), ExtResource("13_pt4s2")], [ExtResource("14_y4hq0"), ExtResource("16_d0ls8")], [ExtResource("15_y16h1")], [ExtResource("16_ogxuw"), ExtResource("18_obgsu")], [ExtResource("17_m5yok")], [ExtResource("18_1ew7n")], [ExtResource("19_4piv5")], [ExtResource("13_7m41y"), ExtResource("23_js5cw"), ExtResource("19_4piv5")]])
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 unique_name_in_owner = true

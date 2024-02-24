@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://bv8832n6hbulw"]
+
+[ext_resource type="Script" path="res://main/fight/enemy.gd" id="1_1vons"]
+[ext_resource type="Texture2D" uid="uid://dw866mxg42q4v" path="res://main/fight/sprites/fight_flagellum.png" id="2_wlk75"]
+
+[resource]
+script = ExtResource("1_1vons")
+life = 19
+strength = 4
+display_name = "Flagellum"
+attack_description = "They thrust wildly!"
+encounter_description = "Many creatures flail towards you."
+drop = "Gold"
+drop_count = 11
+sprite = ExtResource("2_wlk75")
+anim = "idle_2"

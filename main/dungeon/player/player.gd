@@ -115,3 +115,10 @@ func slide() -> void:
 		if steps >= encounter_grace and randf() < encounter_chance:
 			await Ref.fight_manager.fight()
 			steps = 0
+
+func reset():
+	position = Vector2(549, 549)
+	Status.player_stats.life = Status.player_stats.max_life
+	Ref.camera.position = Vector2(546, 552)
+	Ref.dungeon.update_screen(Vector2(6, 11)) 
+

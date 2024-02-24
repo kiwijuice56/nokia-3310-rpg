@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://cxomg0yl7r344"]
 
-[ext_resource type="Script" path="res://main/enemy.gd" id="1_0x4x1"]
+[ext_resource type="Script" path="res://main/fight/enemy.gd" id="1_x6g78"]
 [ext_resource type="Texture2D" uid="uid://cxig4havsvdvg" path="res://main/fight/sprites/fight_flagella.png" id="2_xtwrg"]
 
 [resource]
-script = ExtResource("1_0x4x1")
+script = ExtResource("1_x6g78")
 life = 11
 strength = 2
 display_name = "Flagella"
@@ -13,3 +13,4 @@ encounter_description = "A creature flails towards you."
 drop = "Gold"
 drop_count = 5
 sprite = ExtResource("2_xtwrg")
+anim = "idle_2"

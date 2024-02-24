@@ -71,10 +71,12 @@ func open() -> void:
 		Status.player_stats.wisdom,
 	]
 	
-	var tween: Tween = get_tree().create_tween().set_parallel(true)
-	tween.tween_property(%StatLabels, "visible_ratio", 1.0, 0.1)
-	tween.tween_property(%StatValues, "visible_ratio", 1.0, 0.1)
-	await tween.finished
+	#var tween: Tween = get_tree().create_tween().set_parallel(true)
+	#tween.tween_property(%StatLabels, "visible_ratio", 1.0, 0.1)
+	#tween.tween_property(%StatValues, "visible_ratio", 1.0, 0.1)
+	#await tween.finished
+	%StatLabels.visible_ratio = 1
+	%StatValues.visible_ratio = 1
 	
 	await advanced
 	AudioManager.play_sound("accept", 2)
