@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ddaipsajw5f5l"]
+[gd_scene load_steps=49 format=3 uid="uid://ddaipsajw5f5l"]
 
 [ext_resource type="PackedScene" uid="uid://bsdm2cw8dhp2u" path="res://main/ui/textbox/textbox.tscn" id="1_sd6xj"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_sjoxm"]
@@ -205,6 +205,26 @@ expand_margin_right = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j00rd"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogyle"]
+content_margin_left = 2.0
+content_margin_top = 1.0
+content_margin_right = 2.0
+content_margin_bottom = 1.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.529412, 0.568627, 0.533333, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m1jeg"]
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+anti_aliasing = false
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bdkw"]
 bg_color = Color(0, 0, 0, 1)
 expand_margin_left = 1.0
@@ -223,6 +243,28 @@ expand_margin_left = 1.0
 expand_margin_right = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epgvm"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a70bp"]
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eg0gj"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hw2ay"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eaq5p"]
 bg_color = Color(0, 0, 0, 1)
 expand_margin_left = 1.0
 expand_margin_right = 1.0
@@ -274,24 +316,28 @@ script = ExtResource("1_sjoxm")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="TextBox" parent="UI" instance=ExtResource("1_sd6xj")]
+visible = false
 
 [node name="StatBox" parent="UI" instance=ExtResource("2_ef371")]
 
 [node name="ItemBox" parent="UI" instance=ExtResource("5_p5lcg")]
+visible = false
 
 [node name="FightMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 84.0
-offset_bottom = 48.0
+offset_right = 252.0
+offset_bottom = 144.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("4_4lmjv")
 theme_override_styles/panel = SubResource("StyleBoxFlat_07i4m")
+metadata/_edit_use_anchors_ = true
 
 [node name="EnemySprite" type="Sprite2D" parent="UI/FightMenu"]
 unique_name_in_owner = true
@@ -394,48 +440,43 @@ script = ExtResource("7_vuoif")
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/ShopMenu"]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="UI/ShopMenu/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 1
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/ShopMenu/VBoxContainer/MarginContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/ShopMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_hlk8d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogyle")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ShopMenu/VBoxContainer/PanelContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TitleContainer" type="GridContainer" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+[node name="TitleContainer" type="GridContainer" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="ShopTitle" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/TitleContainer"]
+[node name="ShopTitle" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/TitleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_constants/line_spacing = -2
-theme_override_styles/normal = SubResource("StyleBoxFlat_8pt27")
+theme_override_styles/normal = SubResource("StyleBoxFlat_m1jeg")
 text = "Upgrade       Price
 -------------------"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="StatContainer" type="GridContainer" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="StatContainer" type="GridContainer" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="Life" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
+[node name="Life" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -443,7 +484,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_7bdkw")
 text = "Max. Life"
 
-[node name="Strength" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
+[node name="Strength" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -451,7 +492,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_hivtn")
 text = "Strength      "
 
-[node name="Dexterity" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
+[node name="Dexterity" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -459,7 +500,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_rta8f")
 text = "Dexterity "
 
-[node name="Wisdom" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
+[node name="Wisdom" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -467,57 +508,48 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_epgvm")
 text = "Wisdom "
 
-[node name="PriceContainer" type="GridContainer" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="PriceContainer" type="GridContainer" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="StrengthBuy" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+[node name="StrengthBuy" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_8pt27")
+theme_override_styles/normal = SubResource("StyleBoxFlat_a70bp")
 text = "	10"
 
-[node name="RunLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+[node name="RunLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_eq8v6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_eg0gj")
 text = "10"
 
-[node name="BombLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+[node name="BombLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_kdcpl")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hw2ay")
 text = "10"
 
-[node name="SomaLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+[node name="SomaLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_dnjad")
+theme_override_styles/normal = SubResource("StyleBoxFlat_eaq5p")
 text = "10
 "
 
-[node name="InfoLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer"]
-visible = false
-custom_minimum_size = Vector2(70, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
-theme_override_constants/line_spacing = 0
-text = "the angel dealt 99 damage!"
-autowrap_mode = 2
-visible_characters_behavior = 1
-
 [node name="MarginContainer" type="MarginContainer" parent="UI/ShopMenu/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_constants/margin_left = 1
@@ -539,6 +571,8 @@ texture = ExtResource("2_ohveo")
 hframes = 2
 script = ExtResource("3_adq4t")
 move_time = 0.16
+encounter_chance = null
+encounter_grace = null
 
 [node name="RayCast2D" type="RayCast2D" parent="Player"]
 target_position = Vector2(0, 5.5)

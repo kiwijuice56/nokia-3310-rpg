@@ -36,6 +36,9 @@ func trans_out() -> void:
 	await tween.finished
 	visible = false
 
+func reset_text():
+	%Label.text = ""
+
 func convo(lines: Array[Line]) -> void:
 	for i in range(len(lines)):
 		$MiniDelay.start()

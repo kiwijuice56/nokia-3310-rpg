@@ -13,6 +13,7 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.529412, 0.568627, 0.533333, 1)
+anti_aliasing = false
 
 [sub_resource type="FontVariation" id="FontVariation_j4dlu"]
 base_font = ExtResource("1_6wj2t")

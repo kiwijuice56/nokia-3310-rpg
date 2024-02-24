@@ -507,6 +507,7 @@ position = Vector2(549, 555)
 
 [node name="Shop2" parent="." instance=ExtResource("4_y658e")]
 position = Vector2(153, 321)
+convoend = Array[ExtResource("9_7s5am")]([])
 
 [node name="CacheBox" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(603, 567)

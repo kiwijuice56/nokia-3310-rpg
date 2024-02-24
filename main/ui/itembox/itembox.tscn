@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://doejr0rb0c3oh"]
+[gd_scene load_steps=12 format=3 uid="uid://doejr0rb0c3oh"]
 
 [ext_resource type="Script" path="res://main/ui/itembox/itembox.gd" id="1_e2unq"]
 [ext_resource type="Theme" uid="uid://cwrkv7lqfv2jk" path="res://main/ui/theme.tres" id="2_eed3u"]
@@ -9,6 +9,37 @@ content_margin_top = 1.0
 content_margin_right = 1.0
 content_margin_bottom = 1.0
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_al6aa"]
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_absy5"]
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gd3nd"]
+expand_margin_left = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7tbp"]
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56oxs"]
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_810co"]
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dj12n"]
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymsdg"]
+expand_margin_left = 1.0
+expand_margin_right = 1.0
 
 [node name="ItemBox" type="PanelContainer"]
 anchors_preset = 10
@@ -22,58 +53,97 @@ script = ExtResource("1_e2unq")
 layout_mode = 2
 theme = ExtResource("2_eed3u")
 
-[node name="StatContainer" type="HBoxContainer" parent="PanelContainer"]
-layout_mode = 2
-theme_override_constants/separation = 1
-
-[node name="ItemLabels1" type="Label" parent="PanelContainer/StatContainer"]
+[node name="ItemContainer" type="GridContainer" parent="PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
-theme_override_constants/line_spacing = 0
-text = "Gold:
-Soma:
-Bomb:
-Corpse:"
-visible_characters_behavior = 1
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
 
-[node name="ItemCounts1" type="Label" parent="PanelContainer/StatContainer"]
+[node name="Item1" type="Label" parent="PanelContainer/ItemContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_constants/line_spacing = 0
-text = "999
-3
-3
-10"
+theme_override_styles/normal = SubResource("StyleBoxFlat_al6aa")
+text = "Gold x99"
 visible_characters_behavior = 1
 
-[node name="ItemLabels2" type="Label" parent="PanelContainer/StatContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
-theme_override_constants/line_spacing = 0
-text = "Kila:
-Cross:
-Brain:
-Orb:"
-visible_characters_behavior = 1
-
-[node name="ItemCounts2" type="Label" parent="PanelContainer/StatContainer"]
+[node name="Item2" type="Label" parent="PanelContainer/ItemContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_constants/line_spacing = 0
-text = "3
-1
-1
-1"
+theme_override_styles/normal = SubResource("StyleBoxFlat_absy5")
+text = "Bomb x99"
+visible_characters_behavior = 1
+
+[node name="Item3" type="Label" parent="PanelContainer/ItemContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_constants/line_spacing = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_gd3nd")
+text = "Soma x99"
+visible_characters_behavior = 1
+
+[node name="Item4" type="Label" parent="PanelContainer/ItemContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_constants/line_spacing = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_b7tbp")
+text = "Soma x99"
+visible_characters_behavior = 1
+
+[node name="Item5" type="Label" parent="PanelContainer/ItemContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_constants/line_spacing = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_56oxs")
+text = "Soma x99"
+visible_characters_behavior = 1
+
+[node name="Item6" type="Label" parent="PanelContainer/ItemContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_constants/line_spacing = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_810co")
+text = "Soma x99"
+visible_characters_behavior = 1
+
+[node name="Item7" type="Label" parent="PanelContainer/ItemContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_constants/line_spacing = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_dj12n")
+text = "Soma x99"
+visible_characters_behavior = 1
+
+[node name="Item8" type="Label" parent="PanelContainer/ItemContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_constants/line_spacing = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ymsdg")
+text = "Soma x99"
 visible_characters_behavior = 1

@@ -9,6 +9,24 @@ func _ready() -> void:
 	visible = false
 	set_process_input(false)
 
+func trans_in() -> void:
+	visible = true
+	$VBoxContainer/PanelContainer/VBoxContainer.visible = false
+	$VBoxContainer/MarginContainer.visible = false
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property($VBoxContainer/PanelContainer, "custom_minimum_size:y", 36, 0.125)
+	await tween.finished
+	$VBoxContainer/PanelContainer/VBoxContainer.visible = true
+	$VBoxContainer/MarginContainer.visible = true
+
+func trans_out() -> void:
+	$VBoxContainer/PanelContainer/VBoxContainer.visible = false
+	$VBoxContainer/MarginContainer.visible = false
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property($VBoxContainer/PanelContainer, "custom_minimum_size:y", 0, 0.125)
+	await tween.finished
+	visible = false
+
 func _input(event: InputEvent) -> void:
 	var old_index: int = index
 	if Input.is_action_just_pressed("ui_up"):
@@ -46,7 +64,6 @@ func update_prices() -> void:
 
 func shop() -> void:
 	update_prices()
-	visible = true
 	
 	%StatContainer.get_child(index).get("theme_override_styles/normal").bg_color = Color("#879188")
 	%StatContainer.get_child(index).set("theme_override_colors/font_color", Color("#000000"))
@@ -68,5 +85,3 @@ func shop() -> void:
 		else:
 			AudioManager.stop_sound("bump")
 			AudioManager.play_sound("bump", 1)
-	
-	visible = false

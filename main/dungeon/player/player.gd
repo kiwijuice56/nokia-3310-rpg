@@ -28,15 +28,8 @@ func check_stats() -> void:
 
 func check_items() -> void:
 	AudioManager.play_sound("accept", 2)
-	var items: Array[String] = []
-	var vals: Array[String] = []
-	# Render them in an order I like:)
-	for item in ["Gold", "Soma", "Bomb", "Corpse", "Kila", "Cross", "Brain", "Orb"]:
-		if item in Status.player_stats.items:
-			items.append(item + ":")
-			vals.append(str(Status.player_stats.items[item]))
 	await Ref.itembox.trans_in() 
-	await Ref.itembox.open(items, vals)
+	await Ref.itembox.open()
 	await Ref.itembox.trans_out()
 	can_move = true
 

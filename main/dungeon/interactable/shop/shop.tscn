@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbqendapl42e2"]
+[gd_scene load_steps=14 format=3 uid="uid://cbqendapl42e2"]
 
 [ext_resource type="PackedScene" uid="uid://2q7iqu5nuovb" path="res://main/dungeon/interactable/interactable.tscn" id="1_f67x6"]
 [ext_resource type="Texture2D" uid="uid://bvggjnrg6otnn" path="res://main/dungeon/interactable/shop/shop.png" id="2_40x6p"]
@@ -22,6 +22,13 @@ choices = Array[String]([])
 [sub_resource type="Resource" id="Resource_x36fh"]
 script = ExtResource("3_l2jyn")
 text = "I hate you. Give me Gold."
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_12r8p"]
+script = ExtResource("3_l2jyn")
+text = "Thanks for the business... Moron."
 speed = 0.03
 sound = ""
 choices = Array[String]([])
@@ -104,6 +111,7 @@ script = ExtResource("2_by1jg")
 convoa = Array[ExtResource("3_l2jyn")]([SubResource("Resource_kqpr2")])
 convob = Array[ExtResource("3_l2jyn")]([SubResource("Resource_trftx")])
 convoc = Array[ExtResource("3_l2jyn")]([SubResource("Resource_x36fh")])
+convoend = Array[ExtResource("3_l2jyn")]([SubResource("Resource_12r8p")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_40x6p")
