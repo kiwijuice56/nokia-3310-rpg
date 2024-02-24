@@ -27,11 +27,8 @@ shapes/collision/shape_color=Color(0, 0.596078, 0.701961, 0.168627)
 
 [display]
 
-window/size/viewport_width=84
-window/size/viewport_height=48
 window/size/window_width_override=672
 window/size/window_height_override=384
-window/stretch/mode="viewport"
 
 [input]
 
@@ -76,3 +73,18 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+
+[shader_globals]
+
+color_palette_dark={
+"type": "color",
+"value": Color(0, 0, 0, 1)
+}
+color_palette_light={
+"type": "color",
+"value": Color(0.529412, 0.568627, 0.533333, 1)
+}
+screen_resolution={
+"type": "vec2",
+"value": Vector2(84, 48)
+}

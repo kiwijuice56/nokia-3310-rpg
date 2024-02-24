@@ -4,9 +4,9 @@ shader_type canvas_item;
 //#define DISABLE_PIXEL_GRAIN
 //#define DISABLE_PIXEL_SHADOWS
 
-uniform vec2 screen_resolution = vec2(84, 48);
-uniform vec4 color_palette_dark :source_color = vec4(0);
-uniform vec4 color_palette_light : source_color = vec4(0.529411765, 0.568627451, 0.53333333333, 1.0);
+global uniform vec2 screen_resolution;
+global uniform vec4 color_palette_dark : source_color;
+global uniform vec4 color_palette_light : source_color;
 
 uniform sampler2D screen : hint_default_black, filter_nearest;
 

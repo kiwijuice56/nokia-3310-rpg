@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://ddaipsajw5f5l"]
+[gd_scene load_steps=52 format=3 uid="uid://ddaipsajw5f5l"]
 
 [ext_resource type="PackedScene" uid="uid://bsdm2cw8dhp2u" path="res://main/ui/textbox/textbox.tscn" id="1_sd6xj"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_sjoxm"]
@@ -310,27 +310,111 @@ _data = {
 "walk": SubResource("Animation_xlm3d")
 }
 
+[sub_resource type="Shader" id="Shader_iycrw"]
+code = "shader_type canvas_item;
+
+//#define DISABLE_DOOR_EFFECT
+//#define DISABLE_PIXEL_GRAIN
+//#define DISABLE_PIXEL_SHADOWS
+
+global uniform vec2 screen_resolution;
+global uniform vec4 color_palette_dark : source_color;
+global uniform vec4 color_palette_light : source_color;
+
+uniform sampler2D screen : hint_default_black, filter_nearest;
+
+group_uniforms Pixel.DoorEffect;
+uniform float door_effect : hint_range(0.0001, 1.0) = 0.1;
+uniform float door_intensity : hint_range(0.0001, 2.0) = 0.8;
+
+group_uniforms Pixel.Grain;
+uniform float grain_amount : hint_range(0.0, 1.0) = 0.07;
+
+group_uniforms Pixel.Shadows;
+uniform vec2 shadow_offset = vec2(0.2, 0.2);
+uniform float shadow_intensity : hint_range(0.0, 1.0) = 0.2;
+
+// from https://thebookofshaders.com/10/
+float random(vec2 uv) {
+	return fract(sin(dot(uv.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
+float pixel_value(vec4 color) {
+	return (1.0 - (0.3 * color.r + 0.59 * color.g + 0.11 * color.b)) * color.a;
+}
+
+// TODO
+// - LCD ghosting
+// - blur shadow
+void fragment() {
+	vec2 uv = fract(vec2(UV.x * screen_resolution.x, UV.y * screen_resolution.y));
+	float pixel_mask = step(0.5, pixel_value(texture(screen, UV)));
+
+#ifndef DISABLE_DOOR_EFFECT
+	float screen_door = min(
+		min(smoothstep(0.0, door_effect, uv.x), smoothstep(1.0, 1.0 - door_effect, uv.x)),
+		min(smoothstep(0.0, door_effect, uv.y), smoothstep(1.0, 1.0 - door_effect, uv.y))
+	);
+	pixel_mask *= pow(screen_door, 1.0 / door_intensity);
+#endif
+
+#ifndef DISABLE_PIXEL_SHADOWS
+	float pixel_shadow = pixel_value(texture(screen, UV - shadow_offset / screen_resolution));
+	float shadow_mask = step(0.5, pixel_shadow) * (1.0 - pixel_mask);
+	COLOR = mix(color_palette_light, color_palette_dark, clamp(shadow_mask * shadow_intensity + pixel_mask, 0.0, 1.0));
+#else
+	COLOR = mix(color_palette_light, color_palette_dark, pixel_mask);
+#endif
+
+#ifndef DISABLE_PIXEL_GRAIN
+	float screen_grain = grain_amount * random(UV) - grain_amount / 2.0;
+	COLOR.rgb += screen_grain;
+#endif
+}"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_atksr"]
+viewport_path = NodePath("Screen")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fnqbt"]
+resource_local_to_scene = true
+shader = SubResource("Shader_iycrw")
+shader_parameter/door_effect = 0.0601
+shader_parameter/door_intensity = 0.7001
+shader_parameter/grain_amount = 0.07
+shader_parameter/shadow_offset = Vector2(0.1, 0.1)
+shader_parameter/shadow_intensity = 0.2
+shader_parameter/screen = SubResource("ViewportTexture_atksr")
+
 [node name="Main" type="Node"]
 script = ExtResource("1_sjoxm")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="Screen" type="SubViewport" parent="."]
+unique_name_in_owner = true
+transparent_bg = true
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(84, 48)
+size_2d_override = Vector2i(84, 48)
+render_target_update_mode = 4
 
-[node name="TextBox" parent="UI" instance=ExtResource("1_sd6xj")]
+[node name="UI" type="CanvasLayer" parent="Screen"]
+
+[node name="TextBox" parent="Screen/UI" instance=ExtResource("1_sd6xj")]
 visible = false
 
-[node name="StatBox" parent="UI" instance=ExtResource("2_ef371")]
+[node name="StatBox" parent="Screen/UI" instance=ExtResource("2_ef371")]
 
-[node name="ItemBox" parent="UI" instance=ExtResource("5_p5lcg")]
+[node name="ItemBox" parent="Screen/UI" instance=ExtResource("5_p5lcg")]
 visible = false
 
-[node name="FightMenu" type="PanelContainer" parent="UI"]
+[node name="FightMenu" type="PanelContainer" parent="Screen/UI"]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 252.0
-offset_bottom = 144.0
+offset_right = 84.0
+offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -339,34 +423,34 @@ theme = ExtResource("4_4lmjv")
 theme_override_styles/panel = SubResource("StyleBoxFlat_07i4m")
 metadata/_edit_use_anchors_ = true
 
-[node name="EnemySprite" type="Sprite2D" parent="UI/FightMenu"]
+[node name="EnemySprite" type="Sprite2D" parent="Screen/UI/FightMenu"]
 unique_name_in_owner = true
 position = Vector2(41, 28)
 texture = ExtResource("6_nquky")
 hframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/FightMenu/EnemySprite"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Screen/UI/FightMenu/EnemySprite"]
 libraries = {
 "": SubResource("AnimationLibrary_87v8w")
 }
 speed_scale = 1.5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/FightMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen/UI/FightMenu"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/FightMenu/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Screen/UI/FightMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_hlk8d")
 
-[node name="OptionContainer" type="GridContainer" parent="UI/FightMenu/VBoxContainer/PanelContainer"]
+[node name="OptionContainer" type="GridContainer" parent="Screen/UI/FightMenu/VBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 2
 
-[node name="AttackLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
+[node name="AttackLabel" type="Label" parent="Screen/UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -375,7 +459,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_8pt27")
 text = "attack<"
 
-[node name="RunLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
+[node name="RunLabel" type="Label" parent="Screen/UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -384,7 +468,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_eq8v6")
 text = "run"
 
-[node name="SomaLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
+[node name="SomaLabel" type="Label" parent="Screen/UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -393,7 +477,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_dnjad")
 text = "soma x0"
 
-[node name="BombLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
+[node name="BombLabel" type="Label" parent="Screen/UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -402,7 +486,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_kdcpl")
 text = "bomb x9"
 
-[node name="InfoLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer"]
+[node name="InfoLabel" type="Label" parent="Screen/UI/FightMenu/VBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(70, 0)
@@ -413,18 +497,18 @@ text = "the angel dealt 99 damage!"
 autowrap_mode = 2
 visible_characters_behavior = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/FightMenu/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Screen/UI/FightMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_constants/margin_left = 1
 
-[node name="FightLifeLabel" type="Label" parent="UI/FightMenu/VBoxContainer/MarginContainer"]
+[node name="FightLifeLabel" type="Label" parent="Screen/UI/FightMenu/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 
-[node name="ShopMenu" type="PanelContainer" parent="UI"]
+[node name="ShopMenu" type="PanelContainer" parent="Screen/UI"]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
@@ -437,25 +521,25 @@ theme = ExtResource("4_4lmjv")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_j00rd")
 script = ExtResource("7_vuoif")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ShopMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen/UI/ShopMenu"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/ShopMenu/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Screen/UI/ShopMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ogyle")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ShopMenu/VBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TitleContainer" type="GridContainer" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="TitleContainer" type="GridContainer" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="ShopTitle" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/TitleContainer"]
+[node name="ShopTitle" type="Label" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/TitleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -465,18 +549,18 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_m1jeg")
 text = "Upgrade       Price
 -------------------"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="StatContainer" type="GridContainer" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="StatContainer" type="GridContainer" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="Life" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
+[node name="Life" type="Label" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -484,7 +568,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_7bdkw")
 text = "Max. Life"
 
-[node name="Strength" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
+[node name="Strength" type="Label" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -492,7 +576,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_hivtn")
 text = "Strength      "
 
-[node name="Dexterity" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
+[node name="Dexterity" type="Label" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -500,7 +584,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_rta8f")
 text = "Dexterity "
 
-[node name="Wisdom" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
+[node name="Wisdom" type="Label" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -508,14 +592,14 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_epgvm")
 text = "Wisdom "
 
-[node name="PriceContainer" type="GridContainer" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="PriceContainer" type="GridContainer" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="StrengthBuy" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+[node name="StrengthBuy" type="Label" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
@@ -523,7 +607,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_a70bp")
 text = "	10"
 
-[node name="RunLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+[node name="RunLabel" type="Label" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
@@ -531,7 +615,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_eg0gj")
 text = "10"
 
-[node name="BombLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+[node name="BombLabel" type="Label" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
@@ -539,7 +623,7 @@ theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_hw2ay")
 text = "10"
 
-[node name="SomaLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+[node name="SomaLabel" type="Label" parent="Screen/UI/ShopMenu/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
@@ -548,45 +632,56 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_eaq5p")
 text = "10
 "
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/ShopMenu/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Screen/UI/ShopMenu/VBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_constants/margin_left = 1
 
-[node name="GoldLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer"]
+[node name="GoldLabel" type="Label" parent="Screen/UI/ShopMenu/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
 text = "Gold: 999"
 
-[node name="Dungeon" parent="." instance=ExtResource("2_qqib1")]
+[node name="Dungeon" parent="Screen" instance=ExtResource("2_qqib1")]
 encounter_difficulty = Array[int]([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
-[node name="Player" type="Sprite2D" parent="."]
+[node name="Player" type="Sprite2D" parent="Screen"]
 material = SubResource("ShaderMaterial_o3yem")
 position = Vector2(549, 549)
 texture = ExtResource("2_ohveo")
 hframes = 2
 script = ExtResource("3_adq4t")
 move_time = 0.16
-encounter_chance = null
-encounter_grace = null
 
-[node name="RayCast2D" type="RayCast2D" parent="Player"]
+[node name="RayCast2D" type="RayCast2D" parent="Screen/Player"]
 target_position = Vector2(0, 5.5)
 collision_mask = 6
 collide_with_areas = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Screen/Player"]
 libraries = {
 "": SubResource("AnimationLibrary_ath12")
 }
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Screen"]
 position = Vector2(546, 552)
 
-[node name="FightManager" type="Node" parent="."]
+[node name="FightManager" type="Node" parent="Screen"]
 script = ExtResource("11_7ij1p")
 encounters = Array[Array]([[], [ExtResource("12_v6mow"), ExtResource("13_pt4s2")], [ExtResource("14_y4hq0")], [ExtResource("15_y16h1")], [ExtResource("16_ogxuw")], [ExtResource("17_m5yok")], [ExtResource("18_1ew7n")], [ExtResource("19_4piv5")], [ExtResource("13_7m41y")]])
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.36325
+
+[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer"]
+material = SubResource("ShaderMaterial_fnqbt")
+layout_mode = 2

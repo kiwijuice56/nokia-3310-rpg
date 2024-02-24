@@ -15,8 +15,8 @@ var move_map: Dictionary = {
 	"ui_down": Vector2(0, 1),
 }
 
-@export var encounter_chance: float = 0.83
-@export var encounter_grace: int = 0
+@export var encounter_chance: float = 0.032
+@export var encounter_grace: int = 25
 var steps: int = 0
 
 func check_stats() -> void:
