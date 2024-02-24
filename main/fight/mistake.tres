@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://qyvqdo6kgb05"]
+
+[ext_resource type="Script" path="res://main/enemy.gd" id="1_uq4wj"]
+[ext_resource type="Texture2D" uid="uid://ddu5wdjysmcdk" path="res://main/fight/sprites/fight_mistake.png" id="2_fetkl"]
+
+[resource]
+script = ExtResource("1_uq4wj")
+life = 26
+strength = 8
+display_name = "Mistake"
+attack_description = "It slices into your chest!"
+encounter_description = "A blob of flesh emerges from the darkness."
+drop = "Gold"
+drop_count = 12
+sprite = ExtResource("2_fetkl")

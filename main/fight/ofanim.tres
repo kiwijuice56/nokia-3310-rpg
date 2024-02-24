@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://dtjixrivsyqe6"]
+
+[ext_resource type="Script" path="res://main/enemy.gd" id="1_hdbrb"]
+[ext_resource type="Texture2D" uid="uid://soy5g4tm3bvs" path="res://main/fight/sprites/fight_eye.png" id="2_ktsvr"]
+
+[resource]
+script = ExtResource("1_hdbrb")
+life = 30
+strength = 9
+display_name = "Ofanim"
+attack_description = "It attempts to erase your existence."
+encounter_description = "An Ofanim appears within your mind."
+drop = "Gold"
+drop_count = 13
+sprite = ExtResource("2_ktsvr")

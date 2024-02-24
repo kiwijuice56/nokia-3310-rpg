@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtjr6chv7csru"
-path="res://.godot/imported/fight_angel.png-06015949d549173644d475f66a002a03.ctex"
+uid="uid://cxig4havsvdvg"
+path="res://.godot/imported/fight_flagella.png-5cfbc1d9acdf22d136e96e2698c40034.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://main/dungeon/fight/sprites/fight_angel.png"
-dest_files=["res://.godot/imported/fight_angel.png-06015949d549173644d475f66a002a03.ctex"]
+source_file="res://main/fight/sprites/fight_flagella.png"
+dest_files=["res://.godot/imported/fight_flagella.png-5cfbc1d9acdf22d136e96e2698c40034.ctex"]
 
 [params]
 

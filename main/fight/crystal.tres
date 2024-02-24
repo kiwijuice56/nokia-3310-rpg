@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://5sa0ovyym2v3"]
+
+[ext_resource type="Script" path="res://main/enemy.gd" id="1_liqll"]
+[ext_resource type="Texture2D" uid="uid://cpe3fqr0prrp8" path="res://main/fight/sprites/fight_crystal.png" id="2_mqgcm"]
+
+[resource]
+script = ExtResource("1_liqll")
+life = 15
+strength = 4
+display_name = "Gem"
+attack_description = "It resonates within your head!"
+encounter_description = "A gem vibrates into existence."
+drop = "Gold"
+drop_count = 9
+sprite = ExtResource("2_mqgcm")

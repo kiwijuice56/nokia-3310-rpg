@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://dqbib3mqvgfe4"]
+
+[ext_resource type="Script" path="res://main/enemy.gd" id="1_apj3v"]
+[ext_resource type="Texture2D" uid="uid://b5r1nh3tuyfr4" path="res://main/fight/sprites/fight_poles.png" id="2_h5kxb"]
+
+[resource]
+script = ExtResource("1_apj3v")
+life = 15
+strength = 3
+display_name = "Poles"
+attack_description = "The group pounces on you!"
+encounter_description = "A row of heads emerges from the darkness."
+drop = "Gold"
+drop_count = 7
+sprite = ExtResource("2_h5kxb")

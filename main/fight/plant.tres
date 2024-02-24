@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://cpe3lf1if6jx2"]
+
+[ext_resource type="Script" path="res://main/enemy.gd" id="1_qfp38"]
+[ext_resource type="Texture2D" uid="uid://bndjrevr5kcab" path="res://main/fight/sprites/fight_plant.png" id="2_ewpad"]
+
+[resource]
+script = ExtResource("1_qfp38")
+life = 22
+strength = 6
+display_name = "Totem"
+attack_description = "It poured acid over you!"
+encounter_description = "A sapling sprouts from the dust."
+drop = "Gold"
+drop_count = 11
+sprite = ExtResource("2_ewpad")

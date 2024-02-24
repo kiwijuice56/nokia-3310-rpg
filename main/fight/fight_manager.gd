@@ -55,12 +55,12 @@ func fight() -> void:
 	var timer = get_tree().create_timer(1.0)
 	await timer.timeout
 	
-	AudioManager.play_sound("battle", 0)
+	#AudioManager.play_sound("battle", 0)
 	
 	%FightMenu/VBoxContainer.visible = true
 	%OptionContainer.visible = false
 	%InfoLabel.visible = true
-	%InfoLabel.text = "A %s blocks your path." % encounter.display_name
+	%InfoLabel.text = encounter.encounter_description
 	
 	timer = get_tree().create_timer(3.0)
 	await timer.timeout
@@ -93,7 +93,7 @@ func fight() -> void:
 		if index == 3 and Status.player_stats.items["Bomb"] > 0:
 			Status.player_stats.items["Bomb"] -= 1
 			encounter.life -= Status.player_stats.strength * 2
-			%InfoLabel.text = "You threw a bomb and dealt %d damage!" % (Status.player_stats.strength * 2)
+			%InfoLabel.text = "You threw a bomb and deal %d damage!" % (Status.player_stats.strength * 2)
 			%EnemySprite/AnimationPlayer.play("hurt")
 			AudioManager.play_sound("bomb", 2)
 			timer = get_tree().create_timer(0.4)
@@ -105,25 +105,25 @@ func fight() -> void:
 			timer = get_tree().create_timer(0.6)
 			await timer.timeout
 		
-		
 		if encounter.life <= 0:
 			break
-		%EnemySprite/AnimationPlayer.play("idle")
 		
 		%InfoLabel.visible = true
 		Status.player_stats.life -= encounter.strength
 		update_info()
-		%InfoLabel.text = "%s dealt %d damage!" % [encounter.display_name, encounter.strength]
+		%InfoLabel.text = "It deals %d damage!" % [encounter.strength]
 		%EnemySprite/AnimationPlayer.play("attack")
+		
 		AudioManager.play_sound("attack", 2)
 		await %EnemySprite/AnimationPlayer.animation_finished
 		timer = get_tree().create_timer(0.6)
 		await timer.timeout
+		%EnemySprite/AnimationPlayer.play("idle")
 	
 	if encounter.life <= 0:
 		%EnemySprite.visible = false
 	
-	AudioManager.stop_sound("battle")
+	#AudioManager.stop_sound("battle")
 	%InfoLabel.text = "The creature stopped breathing!"
 	AudioManager.play_sound("win", 4)
 	

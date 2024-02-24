@@ -15,8 +15,8 @@ var move_map: Dictionary = {
 	"ui_down": Vector2(0, 1),
 }
 
-@export var encounter_chance: float = 0.02
-@export var encounter_grace: int = 18
+@export var encounter_chance: float = 0.03
+@export var encounter_grace: int = 28
 var steps: int = 0
 
 func check_stats() -> void:
@@ -118,7 +118,6 @@ func slide() -> void:
 			can_move = false
 			await move_tween.finished
 			can_move = true
-		
 		steps += 1
 		if steps >= encounter_grace and randf() < encounter_chance:
 			await Ref.fight_manager.fight()
