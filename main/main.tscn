@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ddaipsajw5f5l"]
+[gd_scene load_steps=37 format=3 uid="uid://ddaipsajw5f5l"]
 
 [ext_resource type="PackedScene" uid="uid://bsdm2cw8dhp2u" path="res://main/ui/textbox/textbox.tscn" id="1_sd6xj"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_sjoxm"]
@@ -180,6 +180,28 @@ border_width_bottom = 1
 border_color = Color(0.529412, 0.568627, 0.533333, 1)
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8pt27"]
+content_margin_bottom = 0.0
+bg_color = Color(0.768627, 0.768627, 0.768627, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eq8v6"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dnjad"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdcpl"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o3yem"]
 shader = ExtResource("2_dld3a")
 
@@ -267,7 +289,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_hlk8d")
 [node name="OptionContainer" type="GridContainer" parent="UI/FightMenu/VBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/v_separation = -1
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 columns = 2
 
 [node name="AttackLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
@@ -276,6 +299,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_8pt27")
 text = "attack<"
 
 [node name="RunLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
@@ -284,6 +308,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_eq8v6")
 text = "run"
 
 [node name="SomaLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
@@ -292,6 +317,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_dnjad")
 text = "soma x0"
 
 [node name="BombLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer/OptionContainer"]
@@ -300,14 +326,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_kdcpl")
 text = "bomb x9"
 
 [node name="InfoLabel" type="Label" parent="UI/FightMenu/VBoxContainer/PanelContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
-theme_override_constants/line_spacing = -1
+theme_override_constants/line_spacing = 0
 text = "the angel dealt 99 damage!"
 autowrap_mode = 2
 visible_characters_behavior = 1

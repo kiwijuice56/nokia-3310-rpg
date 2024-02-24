@@ -1056,7 +1056,7 @@ position = Vector2(75, 405)
 convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_ap7ac"), SubResource("Resource_qocjm")])
 fail_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_006xb"), SubResource("Resource_mn6xr")])
 success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_cehl2")])
-min_stat = 12
+min_stat = 8
 stat = "Dexterity"
 
 [node name="Sprite2D" parent="Barrier13" index="1"]
@@ -1099,6 +1099,61 @@ count = 8
 position = Vector2(243, 357)
 item = "Gold"
 count = 8
+
+[node name="CacheBox86" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(93, 105)
+item = "Gold"
+count = 10
+
+[node name="CacheBox87" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(117, 105)
+item = "Gold"
+count = 10
+
+[node name="CacheBox88" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(153, 105)
+item = "Gold"
+count = 10
+
+[node name="CacheBox89" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(183, 135)
+item = "Gold"
+count = 10
+
+[node name="CacheBox90" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(207, 135)
+item = "Gold"
+count = 10
+
+[node name="CacheBox91" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(135, 87)
+item = "Gold"
+count = 10
+
+[node name="CacheBox92" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(111, 87)
+item = "Gold"
+count = 10
+
+[node name="CacheBox93" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(195, 57)
+item = "Gold"
+count = 10
+
+[node name="CacheBox94" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(207, 57)
+item = "Gold"
+count = 10
+
+[node name="CacheBox95" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(243, 57)
+item = "Gold"
+count = 10
+
+[node name="CacheBox96" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(243, 135)
+item = "Gold"
+count = 10
 
 [node name="CacheBox51" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(267, 327)
@@ -1275,25 +1330,6 @@ position = Vector2(321, 333)
 item = "Soma"
 count = 1
 
-[node name="Barrier14" parent="." instance=ExtResource("11_hsppn")]
-position = Vector2(75, 405)
-convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_ap7ac"), SubResource("Resource_qocjm")])
-fail_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_006xb"), SubResource("Resource_mn6xr")])
-success_convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_cehl2")])
-min_stat = 12
-stat = "Dexterity"
-
-[node name="Sprite2D" parent="Barrier14" index="1"]
-texture = ExtResource("16_yackh")
-hframes = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Barrier14"]
-libraries = {
-"": SubResource("AnimationLibrary_sniro")
-}
-autoplay = "laser"
-speed_scale = 3.0
-
 [node name="Barrier5" parent="." instance=ExtResource("11_hsppn")]
 position = Vector2(627, 543)
 convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_u114e"), SubResource("Resource_dmv7f")])
@@ -1400,7 +1436,6 @@ texture = ExtResource("9_qk1l6")
 [editable path="Barrier10"]
 [editable path="Barrier11"]
 [editable path="Barrier13"]
-[editable path="Barrier14"]
 [editable path="Barrier5"]
 [editable path="Barrier12"]
 [editable path="Angel4"]

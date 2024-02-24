@@ -27,12 +27,15 @@ func _input(event: InputEvent) -> void:
 	index = index % 4
 	
 	if old_index != index:
-		var old_text: String = %OptionContainer.get_child(old_index).text 
-		%OptionContainer.get_child(old_index).text = old_text.substr(0, len(old_text) - 1)
-		%OptionContainer.get_child(index).text += "<"
-	
+		%OptionContainer.get_child(old_index).get("theme_override_styles/normal").bg_color = Color("#000000")
+		%OptionContainer.get_child(old_index).set("theme_override_colors/font_color", Color("#879188"))
+		
+		%OptionContainer.get_child(index).get("theme_override_styles/normal").bg_color = Color("#879188")
+		%OptionContainer.get_child(index).set("theme_override_colors/font_color", Color("#000000"))
+		AudioManager.play_sound("accept", 1)
 	if Input.is_action_just_pressed("accept"):
 		accepted.emit()
+		AudioManager.play_sound("accept", 1)
 
 func update_info() -> void:
 	%FightLifeLabel.text = "Life: %d/%d" % [Status.player_stats.life, Status.player_stats.max_life]
@@ -44,10 +47,10 @@ func update_info() -> void:
 func fight() -> void:
 	update_info()
 	Ref.player.can_move = false
-	var encounter: Enemy = encounters[Ref.dungeon.get_difficulty()].pick_random()
-	if encounter == null:
+	if Ref.dungeon.get_difficulty() == 0:
 		Ref.player.can_move = true
 		return
+	var encounter: Enemy = encounters[Ref.dungeon.get_difficulty()].pick_random()
 	%FightMenu/VBoxContainer.visible = false
 	%FightMenu.visible = true
 	%EnemySprite.visible = true
@@ -58,8 +61,6 @@ func fight() -> void:
 	var timer = get_tree().create_timer(1.0)
 	await timer.timeout
 	
-	#AudioManager.play_sound("battle", 0)
-	
 	%FightMenu/VBoxContainer.visible = true
 	%OptionContainer.visible = false
 	%InfoLabel.visible = true
@@ -69,22 +70,24 @@ func fight() -> void:
 	await timer.timeout
 	
 	var ran: bool = false
-	
 	encounter = encounter.duplicate()
 	while encounter.life > 0 and Status.player_stats.life > 0:
 		update_info()
-		index = 0
-		%AttackLabel.text += "<"
+		
+		%OptionContainer.get_child(index).get("theme_override_styles/normal").bg_color = Color("#879188")
+		%OptionContainer.get_child(index).set("theme_override_colors/font_color", Color("#000000"))
+		
 		%OptionContainer.visible = true
 		%InfoLabel.visible = false
 		set_process_input(true)
 		await accepted
+		set_process_input(false)
 		
 		%OptionContainer.visible = false
 		%InfoLabel.visible = true
 		if index == 0:
 			encounter.life -= Status.player_stats.strength
-			%InfoLabel.text = "You dealt %d damage!" % Status.player_stats.strength
+			%InfoLabel.text = "You deal %d damage!" % Status.player_stats.strength
 			%EnemySprite/AnimationPlayer.play("hurt")
 			AudioManager.play_sound("bomb", 2)
 			await %EnemySprite/AnimationPlayer.animation_finished
@@ -108,7 +111,7 @@ func fight() -> void:
 			Status.player_stats.items["Soma"] -= 1
 			Status.player_stats.life = Status.player_stats.max_life
 			update_info()
-			%InfoLabel.text = "You fully recovered!" 
+			%InfoLabel.text = "You fully recover!" 
 			AudioManager.play_sound("heal", 2)
 			timer = get_tree().create_timer(1.2)
 			await timer.timeout
@@ -136,7 +139,7 @@ func fight() -> void:
 				Status.player_stats.items["Bomb"] += 1
 			if index == 2:
 				Status.player_stats.items["Soma"] += 1
-			%InfoLabel.text = "You salvaged the item thanks to your Dexterity!"
+			%InfoLabel.text = "You salvage the item thanks to your Dexterity!"
 			AudioManager.play_sound("good1", 2)
 			timer = get_tree().create_timer(1.5)
 			await timer.timeout
