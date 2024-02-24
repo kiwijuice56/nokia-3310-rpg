@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://ddaipsajw5f5l"]
+[gd_scene load_steps=43 format=3 uid="uid://ddaipsajw5f5l"]
 
 [ext_resource type="PackedScene" uid="uid://bsdm2cw8dhp2u" path="res://main/ui/textbox/textbox.tscn" id="1_sd6xj"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_sjoxm"]
@@ -10,6 +10,7 @@
 [ext_resource type="Theme" uid="uid://cwrkv7lqfv2jk" path="res://main/ui/theme.tres" id="4_4lmjv"]
 [ext_resource type="PackedScene" uid="uid://doejr0rb0c3oh" path="res://main/ui/itembox/itembox.tscn" id="5_p5lcg"]
 [ext_resource type="Texture2D" uid="uid://dtjr6chv7csru" path="res://main/fight/sprites/fight_angel.png" id="6_nquky"]
+[ext_resource type="Script" path="res://main/ui/shop_menu.gd" id="7_vuoif"]
 [ext_resource type="Script" path="res://main/fight/fight_manager.gd" id="11_7ij1p"]
 [ext_resource type="Resource" uid="uid://0xftdh02vd6x" path="res://main/fight/angel.tres" id="12_v6mow"]
 [ext_resource type="Resource" uid="uid://dtjixrivsyqe6" path="res://main/fight/ofanim.tres" id="13_7m41y"]
@@ -182,7 +183,7 @@ anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8pt27"]
 content_margin_bottom = 0.0
-bg_color = Color(0.768627, 0.768627, 0.768627, 1)
+bg_color = Color(0, 0, 0, 1)
 expand_margin_left = 1.0
 expand_margin_right = 1.0
 anti_aliasing = false
@@ -198,6 +199,30 @@ expand_margin_left = 1.0
 expand_margin_right = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdcpl"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j00rd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bdkw"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hivtn"]
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rta8f"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epgvm"]
 bg_color = Color(0, 0, 0, 1)
 expand_margin_left = 1.0
 expand_margin_right = 1.0
@@ -259,6 +284,8 @@ unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 84.0
+offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -350,6 +377,157 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+
+[node name="ShopMenu" type="PanelContainer" parent="UI"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_4lmjv")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_j00rd")
+script = ExtResource("7_vuoif")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ShopMenu"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/ShopMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/ShopMenu/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hlk8d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TitleContainer" type="GridContainer" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="ShopTitle" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_constants/line_spacing = -2
+theme_override_styles/normal = SubResource("StyleBoxFlat_8pt27")
+text = "Upgrade       Price
+-------------------"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatContainer" type="GridContainer" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="Life" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_7bdkw")
+text = "Max. Life"
+
+[node name="Strength" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_hivtn")
+text = "Strength      "
+
+[node name="Dexterity" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_rta8f")
+text = "Dexterity "
+
+[node name="Wisdom" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/StatContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_epgvm")
+text = "Wisdom "
+
+[node name="PriceContainer" type="GridContainer" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="StrengthBuy" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_8pt27")
+text = "	10"
+
+[node name="RunLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_eq8v6")
+text = "10"
+
+[node name="BombLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_kdcpl")
+text = "10"
+
+[node name="SomaLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/PriceContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_dnjad")
+text = "10
+"
+
+[node name="InfoLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer2/PanelContainer"]
+visible = false
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+theme_override_constants/line_spacing = 0
+text = "the angel dealt 99 damage!"
+autowrap_mode = 2
+visible_characters_behavior = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/ShopMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/margin_left = 1
+
+[node name="GoldLabel" type="Label" parent="UI/ShopMenu/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0.529412, 0.568627, 0.533333, 1)
+text = "Gold: 999"
 
 [node name="Dungeon" parent="." instance=ExtResource("2_qqib1")]
 encounter_difficulty = Array[int]([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])

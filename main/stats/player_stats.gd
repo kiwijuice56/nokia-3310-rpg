@@ -6,6 +6,7 @@ extends Resource
 @export var strength: int
 @export var wisdom: int
 @export var dexterity: int
+@export var shop_prices: Array[int]
 
 @export var items: Dictionary
 @export var flags: Dictionary

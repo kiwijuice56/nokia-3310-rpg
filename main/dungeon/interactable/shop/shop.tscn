@@ -1,7 +1,30 @@
-[gd_scene load_steps=8 format=3 uid="uid://cbqendapl42e2"]
+[gd_scene load_steps=13 format=3 uid="uid://cbqendapl42e2"]
 
 [ext_resource type="PackedScene" uid="uid://2q7iqu5nuovb" path="res://main/dungeon/interactable/interactable.tscn" id="1_f67x6"]
 [ext_resource type="Texture2D" uid="uid://bvggjnrg6otnn" path="res://main/dungeon/interactable/shop/shop.png" id="2_40x6p"]
+[ext_resource type="Script" path="res://main/dungeon/interactable/shop/shop.gd" id="2_by1jg"]
+[ext_resource type="Script" path="res://main/ui/textbox/line.gd" id="3_l2jyn"]
+
+[sub_resource type="Resource" id="Resource_kqpr2"]
+script = ExtResource("3_l2jyn")
+text = "I will enhance your body in exchange for Gold... Just choose an upgrade."
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_trftx"]
+script = ExtResource("3_l2jyn")
+text = "Had enough yet? I ain't cheap..."
+speed = 0.03
+sound = ""
+choices = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_x36fh"]
+script = ExtResource("3_l2jyn")
+text = "I hate you. Give me Gold."
+speed = 0.03
+sound = ""
+choices = Array[String]([])
 
 [sub_resource type="Animation" id="Animation_l4pdi"]
 length = 0.001
@@ -77,6 +100,10 @@ _data = {
 }
 
 [node name="Shop" instance=ExtResource("1_f67x6")]
+script = ExtResource("2_by1jg")
+convoa = Array[ExtResource("3_l2jyn")]([SubResource("Resource_kqpr2")])
+convob = Array[ExtResource("3_l2jyn")]([SubResource("Resource_trftx")])
+convoc = Array[ExtResource("3_l2jyn")]([SubResource("Resource_x36fh")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_40x6p")
