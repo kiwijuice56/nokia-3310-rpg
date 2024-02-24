@@ -127,9 +127,19 @@ func fight() -> void:
 			timer = get_tree().create_timer(0.6)
 			await timer.timeout
 		else:
-			
 			AudioManager.play_sound("bump", 0)
 			continue
+		
+		var salvage: bool = randf() < (Status.player_stats.dexterity / 32.0)
+		if (index == 2 or index == 3) and salvage:
+			if index == 3:
+				Status.player_stats.items["Bomb"] += 1
+			if index == 2:
+				Status.player_stats.items["Soma"] += 1
+			%InfoLabel.text = "You salvaged the item thanks to your Dexterity!"
+			AudioManager.play_sound("good1", 2)
+			timer = get_tree().create_timer(1.5)
+			await timer.timeout
 		
 		if encounter.life <= 0 or ran:
 			break
