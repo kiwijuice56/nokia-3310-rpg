@@ -45,6 +45,9 @@ func fight() -> void:
 	update_info()
 	Ref.player.can_move = false
 	var encounter: Enemy = encounters[Ref.dungeon.get_difficulty()].pick_random()
+	if encounter == null:
+		Ref.player.can_move = true
+		return
 	%FightMenu/VBoxContainer.visible = false
 	%FightMenu.visible = true
 	%EnemySprite.visible = true
@@ -64,6 +67,8 @@ func fight() -> void:
 	
 	timer = get_tree().create_timer(3.0)
 	await timer.timeout
+	
+	var ran: bool = false
 	
 	encounter = encounter.duplicate()
 	while encounter.life > 0 and Status.player_stats.life > 0:
@@ -85,12 +90,29 @@ func fight() -> void:
 			await %EnemySprite/AnimationPlayer.animation_finished
 			timer = get_tree().create_timer(0.6)
 			await timer.timeout
-		if index == 1:
-			pass
-		if index == 2 and Status.player_stats.items["Soma"] > 0:
+		elif index == 1:
+			%InfoLabel.text = "You try to run away..."
+			AudioManager.play_sound("run", 2)
+			timer = get_tree().create_timer(1.2)
+			await timer.timeout
+			
+			ran = randf() < (0.3 + Status.player_stats.dexterity / 16.0)
+			if not ran:
+				%InfoLabel.text = "... but you were too slow!"
+				AudioManager.play_sound("negative1", 2)
+				timer = get_tree().create_timer(1.5)
+				await timer.timeout
+			else:
+				break
+		elif index == 2 and Status.player_stats.items["Soma"] > 0:
 			Status.player_stats.items["Soma"] -= 1
-			pass
-		if index == 3 and Status.player_stats.items["Bomb"] > 0:
+			Status.player_stats.life = Status.player_stats.max_life
+			update_info()
+			%InfoLabel.text = "You fully recovered!" 
+			AudioManager.play_sound("heal", 2)
+			timer = get_tree().create_timer(1.2)
+			await timer.timeout
+		elif index == 3 and Status.player_stats.items["Bomb"] > 0:
 			Status.player_stats.items["Bomb"] -= 1
 			encounter.life -= Status.player_stats.strength * 2
 			%InfoLabel.text = "You threw a bomb and deal %d damage!" % (Status.player_stats.strength * 2)
@@ -104,8 +126,12 @@ func fight() -> void:
 			await %EnemySprite/AnimationPlayer.animation_finished
 			timer = get_tree().create_timer(0.6)
 			await timer.timeout
+		else:
+			
+			AudioManager.play_sound("bump", 0)
+			continue
 		
-		if encounter.life <= 0:
+		if encounter.life <= 0 or ran:
 			break
 		
 		%InfoLabel.visible = true
@@ -124,17 +150,17 @@ func fight() -> void:
 		%EnemySprite.visible = false
 	
 	#AudioManager.stop_sound("battle")
-	%InfoLabel.text = "The creature stopped breathing!"
+	%InfoLabel.text = "... and you succeed!" if ran else "The creature stopped breathing!"
 	AudioManager.play_sound("win", 4)
 	
 	timer = get_tree().create_timer(1.5)
 	await timer.timeout
 	
-	%InfoLabel.text = "In its corpse, you find %d %s" % [encounter.drop_count, encounter.drop]
-	timer = get_tree().create_timer(1.5)
-	await timer.timeout
-	
-	Status.player_stats.items[encounter.drop] += encounter.drop_count 
+	if not ran:
+		%InfoLabel.text = "In its corpse, you find %d %s" % [encounter.drop_count, encounter.drop]
+		timer = get_tree().create_timer(1.5)
+		await timer.timeout
+		Status.player_stats.items[encounter.drop] += encounter.drop_count 
 	
 	%FightMenu.visible = false
 	Ref.player.can_move = true

@@ -13,7 +13,6 @@ func _ready() -> void:
 	sounds["mundane_mystery"] = preload("res://main/audio/music/mundane_mystery.wav")
 	sounds["haunt"] = preload("res://main/audio/music/haunt.wav")
 	sounds["great_fight"] = preload("res://main/audio/music/great_fight.wav")
-	sounds["battle"] = preload("res://main/audio/music/battle.wav")
 	sounds["item"] = preload("res://main/audio/music/item.wav")
 	sounds["hit4"] = preload("res://main/audio/sfx/hit4.wav")
 	sounds["ring"] = preload("res://main/audio/sfx/ring.wav")
@@ -21,6 +20,7 @@ func _ready() -> void:
 	sounds["attack"] = preload("res://main/audio/sfx/attack.wav")
 	sounds["bomb"] = preload("res://main/audio/sfx/bomb.wav")
 	sounds["win"] = preload("res://main/audio/sfx/win.wav")
+	sounds["run"] = preload("res://main/audio/sfx/run.wav")
 	
 	loaded = true
 

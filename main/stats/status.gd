@@ -9,7 +9,7 @@ func _ready() -> void:
 		player_stats.max_life = 10
 		player_stats.life = 10
 		player_stats.strength = 3
-		player_stats.dexterity = 99
+		player_stats.dexterity = 3
 		player_stats.wisdom = 20
 		player_stats.items = {"Gold": 10, "Soma": 2, "Bomb": 2, "Corpse": 0}
 
