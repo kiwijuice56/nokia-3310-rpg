@@ -45,13 +45,17 @@ func update_info() -> void:
 	%AttackLabel.text = "Attack"
 	%RunLabel.text = "Run"
 
-func fight() -> void:
+func fight(enemy = null) -> bool:
 	update_info()
 	Ref.player.can_move = false
 	if Ref.dungeon.get_difficulty() == 0:
 		Ref.player.can_move = true
-		return
+		return false
 	var encounter: Enemy = encounters[Ref.dungeon.get_difficulty()].pick_random()
+	
+	if enemy != null:
+		encounter = enemy
+	
 	%FightMenu/VBoxContainer.visible = false
 	%FightMenu.visible = true
 	%EnemySprite.visible = true
@@ -67,7 +71,7 @@ func fight() -> void:
 	%InfoLabel.visible = true
 	%InfoLabel.text = encounter.encounter_description
 	
-	timer = get_tree().create_timer(3.0)
+	timer = get_tree().create_timer(2.0)
 	await timer.timeout
 	
 	var ran: bool = false
@@ -88,6 +92,8 @@ func fight() -> void:
 		%InfoLabel.visible = true
 		if index == 0:
 			var damage: int = (1.5 if "Hex" in Status.player_stats.items else 1.0) * Status.player_stats.strength
+			if "Sol" in Status.player_stats.items:
+				damage *= 2
 			encounter.life -= damage
 			%InfoLabel.text = "You deal %d damage!" % damage
 			%EnemySprite/AnimationPlayer.play("hurt")
@@ -119,6 +125,8 @@ func fight() -> void:
 			await timer.timeout
 		elif index == 3 and Status.player_stats.items["Bomb"] > 0:
 			var damage: int =  (3.0 if "Hex" in Status.player_stats.items else 2.0) * Status.player_stats.strength
+			if "Sol" in Status.player_stats.items:
+				damage *= 2
 			Status.player_stats.items["Bomb"] -= 1
 			encounter.life -= damage
 			%InfoLabel.text = "You threw a bomb and deal %d damage!" % damage
@@ -163,9 +171,12 @@ func fight() -> void:
 		await timer.timeout
 		%EnemySprite/AnimationPlayer.play(encounter.anim)
 	
+	var won: bool = false
 	if encounter.life <= 0:
 		%EnemySprite.visible = false
+		won = true
 	if Status.player_stats.life <= 0:
+		won = false
 		AudioManager.play_sound("hit5", 2)
 		%InfoLabel.text = "You die..."
 		
@@ -187,6 +198,7 @@ func fight() -> void:
 		await timer.timeout
 		Ref.ui.get_node("Death").visible = false
 	else:
+		
 		%InfoLabel.text = "... and you succeed!" if ran else "The creature stopped breathing!"
 		AudioManager.play_sound("win", 4)
 		
@@ -198,6 +210,9 @@ func fight() -> void:
 			timer = get_tree().create_timer(1.5)
 			await timer.timeout
 			Status.player_stats.items[encounter.drop] += encounter.drop_count 
-	
+		else:
+			won = false
 	%FightMenu.visible = false
 	Ref.player.can_move = true
+	
+	return won

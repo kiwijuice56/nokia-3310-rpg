@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://do0vofeqr3c0x"]
+
+[ext_resource type="Script" path="res://main/fight/enemy.gd" id="1_1qkp3"]
+[ext_resource type="Texture2D" uid="uid://dse2bdundnatj" path="res://main/fight/sprites/fight_guardian.png" id="2_7cmt8"]
+
+[resource]
+script = ExtResource("1_1qkp3")
+life = 60
+strength = 10
+display_name = "Guard"
+attack_description = "It attempts to erase your existence."
+encounter_description = "The darkness materializes."
+drop = "Gold"
+drop_count = 50
+sprite = ExtResource("2_7cmt8")
+anim = "idle_2"

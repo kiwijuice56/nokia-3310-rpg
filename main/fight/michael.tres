@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://6onxqhdpxsys"]
+
+[ext_resource type="Script" path="res://main/fight/enemy.gd" id="1_1a46l"]
+[ext_resource type="Texture2D" uid="uid://b4127fcs6xbig" path="res://main/fight/sprites/fight_michael.png" id="2_7npsi"]
+
+[resource]
+script = ExtResource("1_1a46l")
+life = 100
+strength = 15
+display_name = "Guard"
+attack_description = "It attempts to erase your existence."
+encounter_description = "A cloud of fog surrounds you."
+drop = "Gold"
+drop_count = 128
+sprite = ExtResource("2_7npsi")
+anim = "idle"

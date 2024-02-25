@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://ddaipsajw5f5l"]
+[gd_scene load_steps=66 format=3 uid="uid://ddaipsajw5f5l"]
 
 [ext_resource type="PackedScene" uid="uid://bsdm2cw8dhp2u" path="res://main/ui/textbox/textbox.tscn" id="1_sd6xj"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_sjoxm"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://doejr0rb0c3oh" path="res://main/ui/itembox/itembox.tscn" id="5_p5lcg"]
 [ext_resource type="Texture2D" uid="uid://dtjr6chv7csru" path="res://main/fight/sprites/fight_angel.png" id="6_nquky"]
 [ext_resource type="Script" path="res://main/ui/shop_menu.gd" id="7_vuoif"]
+[ext_resource type="Script" path="res://main/end_sequence.gd" id="8_3rq73"]
 [ext_resource type="Script" path="res://main/fight/fight_manager.gd" id="11_7ij1p"]
 [ext_resource type="Resource" uid="uid://0xftdh02vd6x" path="res://main/fight/angel.tres" id="12_v6mow"]
 [ext_resource type="Resource" uid="uid://dtjixrivsyqe6" path="res://main/fight/ofanim.tres" id="13_7m41y"]
@@ -292,6 +293,13 @@ bg_color = Color(0, 0, 0, 1)
 expand_margin_left = 1.0
 expand_margin_right = 1.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgef7"]
+content_margin_left = 1.0
+content_margin_top = 0.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+bg_color = Color(0.529412, 0.568627, 0.533333, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o3yem"]
 shader = ExtResource("2_dld3a")
 
@@ -568,11 +576,12 @@ visible = false
 
 [node name="FightMenu" type="PanelContainer" parent="Screen/UI"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 168.0
-offset_bottom = 96.0
+offset_right = 588.0
+offset_bottom = 336.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -812,6 +821,33 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="EndSequence" type="PanelContainer" parent="Screen/UI"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_4lmjv")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fgef7")
+script = ExtResource("8_3rq73")
+
+[node name="Label" type="Label" parent="Screen/UI/EndSequence"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -1
+text = "You interact with the vortex...
+                       A voice beckons you...                 
+
+But there was nobody there.
+"
+autowrap_mode = 2
+visible_characters_behavior = 1
+
 [node name="Dungeon" parent="Screen" instance=ExtResource("2_qqib1")]
 encounter_difficulty = Array[int]([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
@@ -864,7 +900,7 @@ frame = 5
 libraries = {
 "": SubResource("AnimationLibrary_xquj8")
 }
-speed_scale = 8.0
+speed_scale = 2.0
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 unique_name_in_owner = true

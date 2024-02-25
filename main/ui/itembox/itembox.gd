@@ -46,7 +46,7 @@ func _ready() -> void:
 	visible = false
 
 func update_items():
-	var items: Array[String] = ["Gold", "Soma", "Bomb", "Key", "Hex", "Orb", "Boots"]
+	var items: Array[String] = ["Gold", "Soma", "Bomb", "Key", "Hex", "Orb", "Boots", "Sol"]
 	for i in range(8):
 		if i >= len(items) or not items[i] in Status.player_stats.items:
 			%ItemContainer.get_child(i).text = ""

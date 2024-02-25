@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func interact(player: Player) -> void:
 	if item == "Gold":
-		count = round(count * (randf_range(0.4, 0.8) + (Status.player_stats.wisdom / 8.0)))
+		count = round(count * (randf_range(0.5, 0.9) + (Status.player_stats.wisdom / 8.0)))
 		if count <= 0:
 			count = 1
 	

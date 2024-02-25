@@ -76,3 +76,10 @@ func set_palette(new_palette: PALETTE) -> void:
 
 func _input(event) -> void:
 	%Screen.push_input(event)
+	
+	if event.is_action_pressed("debug_god", false):
+		Status.player_stats.max_life += 16
+		Status.player_stats.strength += 16
+		Status.player_stats.wisdom += 16
+		Status.player_stats.dexterity += 16
+		Status.player_stats.items["Boots"] = 1

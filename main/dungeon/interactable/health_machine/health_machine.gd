@@ -6,6 +6,7 @@ extends Interactable
 func interact(player: Player) -> void:
 	player.can_move = false
 	Status.player_stats.life = Status.player_stats.max_life
+	Status.save_file()
 	await Ref.textbox.trans_in()
 	await Ref.textbox.convo(convo)
 	await Ref.textbox.trans_out()

@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://2gvoo7iulj7x"]
+
+[ext_resource type="PackedScene" uid="uid://2nayajefompd" path="res://main/dungeon/interactable/character/character.tscn" id="1_k6fhp"]
+[ext_resource type="Script" path="res://main/dungeon/interactable/character/boss.gd" id="2_alnuy"]
+[ext_resource type="Texture2D" uid="uid://cpflw42ql2o8f" path="res://main/dungeon/interactable/character/boss.png" id="3_mgd0e"]
+[ext_resource type="Shader" path="res://main/inverse.gdshader" id="3_xjpms"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yrjpu"]
+shader = ExtResource("3_xjpms")
+
+[sub_resource type="Animation" id="Animation_436bj"]
+resource_name = "blobb"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_kp6rj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjdts"]
+_data = {
+"RESET": SubResource("Animation_kp6rj"),
+"blobb": SubResource("Animation_436bj")
+}
+
+[node name="Boss" instance=ExtResource("1_k6fhp")]
+script = ExtResource("2_alnuy")
+encounter = null
+custom_id = ""
+metadata/_edit_vertical_guides_ = [109.0]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_yrjpu")
+texture = ExtResource("3_mgd0e")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_qjdts")
+}
+autoplay = "blobb"
+speed_scale = 2.5

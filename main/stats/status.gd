@@ -11,11 +11,12 @@ func _ready() -> void:
 		player_stats.strength = 3
 		player_stats.dexterity = 3
 		player_stats.wisdom = 3
-		player_stats.items = {"Gold": 10, "Soma": 2, "Bomb": 2, "Boots": 1, "Hex": 1, "Orb": 1, "Key": 1}
-		player_stats.shop_prices = [6, 9, 9, 9]
+		player_stats.items = {"Gold": 10, "Soma": 3, "Bomb": 3}
+		player_stats.shop_prices = [6, 6, 6, 6]
 
 func load_file() -> void:
-	pass
+	if ResourceLoader.exists("user://data.tres"):
+		player_stats = ResourceLoader.load("user://data.tres")
 
 func save_file() -> void:
-	pass
+	ResourceSaver.save(player_stats, "user://data.tres")

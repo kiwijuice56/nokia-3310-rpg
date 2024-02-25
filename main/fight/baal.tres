@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://2s3wec06kwke"]
+
+[ext_resource type="Script" path="res://main/fight/enemy.gd" id="1_8o610"]
+[ext_resource type="Texture2D" uid="uid://dgv6dr7ilb4qv" path="res://main/fight/sprites/fight_baal.png" id="2_c0hfp"]
+
+[resource]
+script = ExtResource("1_8o610")
+life = 15
+strength = 4
+display_name = "Baal"
+attack_description = "It whips you!"
+encounter_description = "An incoherent blob of flesh attacks!"
+drop = "Gold"
+drop_count = 15
+sprite = ExtResource("2_c0hfp")
+anim = "idle_2"

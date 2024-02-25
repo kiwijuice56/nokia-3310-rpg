@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://bh4a45p285s75"]
+
+[ext_resource type="PackedScene" uid="uid://2nayajefompd" path="res://main/dungeon/interactable/character/character.tscn" id="1_ql11h"]
+[ext_resource type="Texture2D" uid="uid://dsu2xujh8cua6" path="res://main/dungeon/interactable/exit.png" id="2_3asav"]
+[ext_resource type="Script" path="res://main/dungeon/interactable/exit.gd" id="2_08t68"]
+
+[sub_resource type="Animation" id="Animation_773kn"]
+resource_name = "exit"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_1ocmh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqdn1"]
+_data = {
+"RESET": SubResource("Animation_1ocmh"),
+"exit": SubResource("Animation_773kn")
+}
+
+[node name="Exit" instance=ExtResource("1_ql11h")]
+script = ExtResource("2_08t68")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_3asav")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_dqdn1")
+}
+autoplay = "exit"
+speed_scale = 2.0
