@@ -31,7 +31,22 @@ var resolution = Vector2(84, 48)
 
 func _ready() -> void:
 	_update_aspect_ratio()
-
+	
+	Ref.player.can_move = false
+	$Screen/Title.visible = true
+	var a: AnimationPlayer = $Screen/Title/AnimationPlayer
+	a.play("title_in")
+	await a.animation_finished
+	a.play("title_out")
+	await a.animation_finished
+	a.play("control_in")
+	await a.animation_finished
+	a.play("control_out")
+	await a.animation_finished
+	Ref.player.can_move = true
+	$Screen/Title.visible = false
+	
+	
 func set_orientation(new_screen_orientation: ORIENTATION) -> void:
 	if screen_orientation != new_screen_orientation:
 		pixel_ratio = 1.0 / pixel_ratio

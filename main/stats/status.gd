@@ -11,7 +11,7 @@ func _ready() -> void:
 		player_stats.strength = 3
 		player_stats.dexterity = 3
 		player_stats.wisdom = 3
-		player_stats.items = {"Gold": 10, "Soma": 2, "Bomb": 2}
+		player_stats.items = {"Gold": 10, "Soma": 2, "Bomb": 2, "Boots": 1, "Hex": 1, "Orb": 1, "Key": 1}
 		player_stats.shop_prices = [6, 9, 9, 9]
 
 func load_file() -> void:

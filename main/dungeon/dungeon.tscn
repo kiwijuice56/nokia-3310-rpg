@@ -1299,6 +1299,11 @@ position = Vector2(15, 549)
 item = "Hex"
 count = 1
 
+[node name="CacheBox110" parent="." instance=ExtResource("7_7woqm")]
+position = Vector2(441, 315)
+item = "Boots"
+count = 1
+
 [node name="CacheBox3" parent="." instance=ExtResource("7_7woqm")]
 position = Vector2(657, 537)
 item = "Soma"
@@ -2583,14 +2588,14 @@ speed_scale = 1.5
 position = Vector2(700, 543)
 convo = Array[ExtResource("9_7s5am")]([SubResource("Resource_n1esg")])
 
+[node name="CollisionShape2D" parent="Character5a" index="0"]
+position = Vector2(2, -6)
+shape = SubResource("RectangleShape2D_48smm")
+
 [node name="Sprite2D" type="Sprite2D" parent="Character5a"]
 position = Vector2(2, -6)
 texture = ExtResource("21_36uju")
 hframes = 5
-
-[node name="CollisionShape2D" parent="Character5a" index="1"]
-position = Vector2(2, -6)
-shape = SubResource("RectangleShape2D_48smm")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Character5a"]
 libraries = {

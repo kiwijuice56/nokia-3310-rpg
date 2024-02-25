@@ -87,8 +87,9 @@ func fight() -> void:
 		%OptionContainer.visible = false
 		%InfoLabel.visible = true
 		if index == 0:
-			encounter.life -= Status.player_stats.strength
-			%InfoLabel.text = "You deal %d damage!" % Status.player_stats.strength
+			var damage: int = (1.5 if "Hex" in Status.player_stats.items else 1.0) * Status.player_stats.strength
+			encounter.life -= damage
+			%InfoLabel.text = "You deal %d damage!" % damage
 			%EnemySprite/AnimationPlayer.play("hurt")
 			AudioManager.play_sound("bomb", 2)
 			await %EnemySprite/AnimationPlayer.animation_finished
@@ -117,9 +118,10 @@ func fight() -> void:
 			timer = get_tree().create_timer(1.2)
 			await timer.timeout
 		elif index == 3 and Status.player_stats.items["Bomb"] > 0:
+			var damage: int =  (3.0 if "Hex" in Status.player_stats.items else 2.0) * Status.player_stats.strength
 			Status.player_stats.items["Bomb"] -= 1
-			encounter.life -= Status.player_stats.strength * 2
-			%InfoLabel.text = "You threw a bomb and deal %d damage!" % (Status.player_stats.strength * 2)
+			encounter.life -= damage
+			%InfoLabel.text = "You threw a bomb and deal %d damage!" % damage
 			%EnemySprite/AnimationPlayer.play("hurt")
 			AudioManager.play_sound("bomb", 2)
 			timer = get_tree().create_timer(0.4)
@@ -149,9 +151,10 @@ func fight() -> void:
 			break
 		
 		%InfoLabel.visible = true
-		Status.player_stats.life -= encounter.strength
+		var damage: int = encounter.strength * (0.5 if "Orb" in Status.player_stats.items else 1.0)
+		Status.player_stats.life -= damage
 		update_info()
-		%InfoLabel.text = "It deals %d damage!" % [encounter.strength]
+		%InfoLabel.text = "It deals %d damage!" % damage
 		%EnemySprite/AnimationPlayer.play("attack")
 		
 		AudioManager.play_sound("attack", 2)

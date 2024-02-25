@@ -91,7 +91,7 @@ func slide() -> void:
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("walk")
 		move_tween = get_tree().create_tween().set_parallel(true)
-		move_tween.tween_property(self, "position", position + dir * 6, move_time)
+		move_tween.tween_property(self, "position", position + dir * 6, move_time * (0.6 if "Boots" in Status.player_stats.items else 1.0))
 		
 		var new_position: Vector2 = position + dir * 6
 		var top_left: Vector2 = Ref.dungeon.screen * Vector2(84, 48)

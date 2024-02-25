@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://ddaipsajw5f5l"]
+[gd_scene load_steps=64 format=3 uid="uid://ddaipsajw5f5l"]
 
 [ext_resource type="PackedScene" uid="uid://bsdm2cw8dhp2u" path="res://main/ui/textbox/textbox.tscn" id="1_sd6xj"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_sjoxm"]
@@ -24,6 +24,8 @@
 [ext_resource type="Resource" uid="uid://bv8832n6hbulw" path="res://main/fight/flagellum.tres" id="18_obgsu"]
 [ext_resource type="Resource" uid="uid://qyvqdo6kgb05" path="res://main/fight/mistake.tres" id="19_4piv5"]
 [ext_resource type="Resource" uid="uid://cchrld6oh82ie" path="res://main/fight/cherub.tres" id="23_js5cw"]
+[ext_resource type="Texture2D" uid="uid://dijs5emqn6ynw" path="res://main/title_sequence.png" id="25_rnd83"]
+[ext_resource type="Texture2D" uid="uid://b58w7cgb5uoy7" path="res://main/control_sequence.png" id="26_72dgr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07i4m"]
 content_margin_left = 0.0
@@ -331,6 +333,142 @@ _data = {
 "walk": SubResource("Animation_xlm3d")
 }
 
+[sub_resource type="Animation" id="Animation_qrmji"]
+resource_name = "title_in"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_vd10d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D2:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_0ox1o"]
+resource_name = "title_out"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 2, 1, 0, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_hacv1"]
+resource_name = "control_out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_05ubb"]
+resource_name = "control_in"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 6, 5, 4, 3, 2, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xquj8"]
+_data = {
+"RESET": SubResource("Animation_vd10d"),
+"control_in": SubResource("Animation_05ubb"),
+"control_out": SubResource("Animation_hacv1"),
+"title_in": SubResource("Animation_qrmji"),
+"title_out": SubResource("Animation_0ox1o")
+}
+
 [sub_resource type="Shader" id="Shader_iycrw"]
 code = "shader_type canvas_item;
 
@@ -433,8 +571,8 @@ unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 84.0
-offset_bottom = 48.0
+offset_right = 168.0
+offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -701,6 +839,32 @@ position = Vector2(546, 552)
 [node name="FightManager" type="Node" parent="Screen"]
 script = ExtResource("11_7ij1p")
 encounters = Array[Array]([[], [ExtResource("12_v6mow"), ExtResource("13_pt4s2")], [ExtResource("14_y4hq0"), ExtResource("16_d0ls8")], [ExtResource("15_y16h1")], [ExtResource("16_ogxuw"), ExtResource("18_obgsu")], [ExtResource("17_m5yok")], [ExtResource("18_1ew7n")], [ExtResource("19_4piv5")], [ExtResource("13_7m41y"), ExtResource("23_js5cw"), ExtResource("19_4piv5")]])
+
+[node name="Title" type="Control" parent="Screen"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Sprite2D2" type="Sprite2D" parent="Screen/Title"]
+z_index = 10
+texture = ExtResource("26_72dgr")
+centered = false
+offset = Vector2(504, 528)
+hframes = 8
+frame = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="Screen/Title"]
+z_index = 10
+texture = ExtResource("25_rnd83")
+centered = false
+offset = Vector2(504, 528)
+hframes = 6
+frame = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Screen/Title"]
+libraries = {
+"": SubResource("AnimationLibrary_xquj8")
+}
+speed_scale = 8.0
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 unique_name_in_owner = true

@@ -23,7 +23,7 @@ func _input(event: InputEvent) -> void:
 	if index < 0:
 		index += 3
 	
-	index = index % 3
+	index = index % 8
 	
 	if old_index != index:
 		%ItemContainer.get_child(old_index).get("theme_override_styles/normal").bg_color = Color("#000000")
@@ -46,9 +46,9 @@ func _ready() -> void:
 	visible = false
 
 func update_items():
-	var items: Array[String] = ["Gold", "Soma", "Bomb"]
+	var items: Array[String] = ["Gold", "Soma", "Bomb", "Key", "Hex", "Orb", "Boots"]
 	for i in range(8):
-		if i >= len(items):
+		if i >= len(items) or not items[i] in Status.player_stats.items:
 			%ItemContainer.get_child(i).text = ""
 		else:
 			%ItemContainer.get_child(i).text = items[i] + " x" + str(Status.player_stats.items[items[i]])
