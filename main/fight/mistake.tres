@@ -13,3 +13,4 @@ encounter_description = "A blob of flesh emerges from the darkness."
 drop = "Gold"
 drop_count = 12
 sprite = ExtResource("2_fetkl")
+anim = "idle_2"

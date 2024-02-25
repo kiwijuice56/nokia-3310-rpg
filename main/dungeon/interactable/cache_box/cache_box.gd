@@ -16,8 +16,9 @@ func _ready() -> void:
 
 func interact(player: Player) -> void:
 	if item == "Gold":
-		count = round(count * (randf_range(0.6, 1.0) + (Status.player_stats.wisdom / 8.0)))
-		
+		count = round(count * (randf_range(0.4, 0.8) + (Status.player_stats.wisdom / 8.0)))
+		if count <= 0:
+			count = 1
 	
 	convo[1].text = "(Inside, you find %d %s.)" % [count, item] 
 	player.can_move = false

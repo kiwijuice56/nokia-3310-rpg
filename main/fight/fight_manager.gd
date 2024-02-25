@@ -9,6 +9,7 @@ var index: int = 0
 
 func _ready() -> void:
 	%FightMenu.visible = false
+	%FightMenu.anchors_preset = Control.PRESET_FULL_RECT
 	set_process_input(false)
 
 func _input(event: InputEvent) -> void:
@@ -163,10 +164,21 @@ func fight() -> void:
 		%EnemySprite.visible = false
 	if Status.player_stats.life <= 0:
 		AudioManager.play_sound("hit5", 2)
-		%InfoLabel.text = "You died..."
+		%InfoLabel.text = "You die..."
+		
 		Ref.player.reset()
 		timer = get_tree().create_timer(1.5)
 		await timer.timeout
+		
+		var gold_lost: int = round(Status.player_stats.items["Gold"] * 0.35)
+		Status.player_stats.items["Gold"] -= gold_lost
+		if Status.player_stats.items["Gold"] < 0:
+			Status.player_stats.items["Gold"] = 0
+		
+		%InfoLabel.text = "You lose %d Gold." % gold_lost
+		timer = get_tree().create_timer(1.5)
+		await timer.timeout
+		
 		Ref.ui.get_node("Death").visible = true
 		timer = get_tree().create_timer(2.5)
 		await timer.timeout

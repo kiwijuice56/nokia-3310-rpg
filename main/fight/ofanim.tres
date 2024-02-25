@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_hdbrb")
-life = 30
+life = 42
 strength = 9
 display_name = "Ofanim"
 attack_description = "It attempts to erase your existence."
@@ -13,3 +13,4 @@ encounter_description = "An Ofanim appears within your mind."
 drop = "Gold"
 drop_count = 13
 sprite = ExtResource("2_ktsvr")
+anim = "idle"
